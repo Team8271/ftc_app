@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.ExampleCode.MyBotHardwareSetup;
  *  Created by TeameurekaRobotics on 12/30/2016
  *
  * This file contains an minimal example of a Linear Tele "OpMode".
- * The hardware configuration uses MyBotHardwareSetup.java
+ * The hardware configuration uses OurRobotHardwareSetup.java
  *
  * This particular OpMode just executes a basic Tank Drive, an Arm motor and 2 Servos similar to a PushBot
  * It includes all the skeletal structure that a linear OpModes contain.

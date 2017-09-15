@@ -51,10 +51,10 @@ import org.firstinspires.ftc.teamcode.ExampleCode.MyBotHardwareSetup;
 
 @TeleOp(name="TestBedOpMode", group="Examples")  // @Autonomous(...) is the other common choice
 @Disabled
-public class MyTestBed_TeleOp extends LinearOpMode {
+public class OurTestBed_TeleOp extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
-    MyBotHardwareSetup robot        = new MyBotHardwareSetup();  // Use MyBotHardware Setup
+    OurRobotHardwareSetup robot        = new OurRobotHardwareSetup();  // Use MyBotHardware Setup
 
     @Override
     public void runOpMode() throws InterruptedException {
