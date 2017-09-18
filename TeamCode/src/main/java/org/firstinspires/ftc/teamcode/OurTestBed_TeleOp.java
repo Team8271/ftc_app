@@ -35,6 +35,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.ExampleCode.MyBotHardwareSetup;
@@ -50,7 +51,7 @@ import org.firstinspires.ftc.teamcode.ExampleCode.MyBotHardwareSetup;
 
 
 @TeleOp(name="TestBedOpMode", group="Examples")  // @Autonomous(...) is the other common choice
-@Disabled
+//@Disabled
 public class OurTestBed_TeleOp extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -100,6 +101,7 @@ public class OurTestBed_TeleOp extends LinearOpMode {
                 robot.servoHandL.setPosition(robot.CLOSED);
             }
 
+/*
             //CR Servo commands
             if(gamepad1.x) //button x will spinLeft
             {
@@ -113,6 +115,7 @@ public class OurTestBed_TeleOp extends LinearOpMode {
             {
                 robot.crServo.setPosition(robot.STOP);
             }
+*/
 
 
             idle(); // Always call idle() at the bottom of your while(opModeIsActive()) loop
