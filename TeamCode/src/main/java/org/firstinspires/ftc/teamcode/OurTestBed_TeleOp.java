@@ -50,7 +50,7 @@ import org.firstinspires.ftc.teamcode.ExampleCode.MyBotHardwareSetup;
  */
 
 
-@TeleOp(name="TestBedOpMode", group="Examples")  // @Autonomous(...) is the other common choice
+@TeleOp(name="REVTestBedOp", group="Examples")  // @Autonomous(...) is the other common choice
 //@Disabled
 public class OurTestBed_TeleOp extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
