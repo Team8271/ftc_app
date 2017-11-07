@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.util.Range;
  * Created by Maddie, FTC Team 4962, The Rockettes
  * version 1.0 Aug 11, 2016
  * This is an Iterative vs Linear program
+ * for TeleOp control with a single controller
  */
 
 /*
@@ -27,7 +28,7 @@ import com.qualcomm.robotcore.util.Range;
         X           X
           X       X
 */
-@TeleOp(name = "Concept: HolonomicDrivetrain", group = "Concept")
+@TeleOp(name = "Example: HolonomicTeleOp", group = "Examples")
 //@Disabled
 public class HolonomicExample extends OpMode {
 
