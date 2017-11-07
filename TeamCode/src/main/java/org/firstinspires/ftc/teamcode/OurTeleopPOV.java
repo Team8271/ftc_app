@@ -18,14 +18,14 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  */
 
 @TeleOp(name="Pushbot: Teleop POV", group="Pushbot")
-@Disabled
+//@Disabled
 public class OurTeleopPOV extends LinearOpMode {
 
   /* Declare OpMode members. */
-  HardwarePushbot robot = new HardwarePushbot();   // Use a Pushbot's hardware
+  OurRobotHardwareSetup robot = new OurRobotHardwareSetup();   // Use a Pushbot's hardware
 
   double clawOffset = 0;                       // Servo mid position
-  final double CLAW_SPEED = 0.02;                   // sets rate to move servo
+  final double CLAW_SPEED = 0.3;                   // sets rate to move servo
 
   @Override
   public void runOpMode() {
@@ -53,8 +53,8 @@ public class OurTeleopPOV extends LinearOpMode {
       // Run wheels in POV mode (note: The joystick goes negative when pushed forwards, so negate it)
       // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
       // This way it's also easy to just drive straight, or just turn.
-      drive = -gamepad1.left_stick_y;
-      turn = gamepad1.right_stick_x;
+      drive = -gamepad1.left_stick_y/2;
+      turn = gamepad1.right_stick_x/2;
 
       // Combine drive and turn for blended motion.
       left = drive + turn;
@@ -68,27 +68,27 @@ public class OurTeleopPOV extends LinearOpMode {
       }
 
       // Output the safe vales to the motor drives.
-      robot.leftDrive.setPower(left);
-      robot.rightDrive.setPower(right);
+      robot.motorLeft.setPower(left);
+      robot.motorRight.setPower(right);
 
       // Use gamepad left & right Bumpers to open and close the claw
-      if (gamepad1.right_bumper)
+      if (gamepad1.x)
         clawOffset += CLAW_SPEED;
-      else if (gamepad1.left_bumper)
+      else if (gamepad1.b)
         clawOffset -= CLAW_SPEED;
 
       // Move both servos to new position.  Assume servos are mirror image of each other.
       clawOffset = Range.clip(clawOffset, -0.5, 0.5);
-      robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
-      robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);
+      robot.servoHandL.setPosition(robot.OPEN + clawOffset);
+      robot.servoHandR.setPosition(robot.OPEN - clawOffset);
 
-      // Use gamepad buttons to move arm up (Y) and down (A)
-      if (gamepad1.y)
-        robot.leftArm.setPower(robot.ARM_UP_POWER);
-      else if (gamepad1.a)
-        robot.leftArm.setPower(robot.ARM_DOWN_POWER);
-      else
-        robot.leftArm.setPower(0.0);
+      // Use gamepad buttons to move arm up
+      if (gamepad1.right_bumper) {
+        robot.motorArm.setPower(0.1);
+      }
+      else {
+        robot.motorArm.setPower(-0.1);
+      }
 
       // Send telemetry message to signify robot running;
       telemetry.addData("claw", "Offset = %.2f", clawOffset);
