@@ -31,7 +31,7 @@ public class OurTeleopPOV extends LinearOpMode {
     robot.init(hardwareMap);
 
     // Send telemetry message to signify robot waiting;
-    telemetry.addData("Say", "Hello Driver");    //
+    telemetry.addData("Hello Driver", "Waiting for Start...");    //
     telemetry.update();
 
     // Wait for the game to start (driver presses PLAY)
@@ -62,17 +62,17 @@ public class OurTeleopPOV extends LinearOpMode {
       if(gamepad1.a) //button 'a' will open
       {
         robot.servoHandR.setPosition(robot.OPEN);
-        robot.servoHandL.setPosition(robot.OPEN);
+        robot.servoHandL.setPosition(robot.CLOSED);
       }
       else if (gamepad1.b) //button 'b' will close
       {
         robot.servoHandR.setPosition(robot.CLOSED);
-        robot.servoHandL.setPosition(robot.CLOSED);
+        robot.servoHandL.setPosition(robot.OPEN);
       }
 
       // Arm Control - Uses dual buttons to control motor direction
-      double armUp = gamepad1.right_trigger;
-      double armDown = -gamepad1.right_trigger;
+      double armUp = gamepad1.right_trigger/2;
+      double armDown = -gamepad1.right_trigger/2;
 
       if(gamepad1.right_bumper)
       {
@@ -85,13 +85,46 @@ public class OurTeleopPOV extends LinearOpMode {
 
       // Send telemetry message to signify robot running;
       telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-      telemetry.addData("Arm", "%.2f", armUp, armDown);
+      //telemetry.addData("Arm", "Up (%.2f), Down (%.2f)", armUp, armDown);
 
-      telemetry.addData("Claw", "%.2f", gamepad1.a, gamepad1.b);
+      //telemetry.addData("Claw", "%.2f", gamepad1.a, gamepad1.b);
       telemetry.update();
 
       // Pace this loop so jaw action is reasonable speed.
       //sleep(50); not sure this is needed
     }
+  }
+  /*
+ * This method scales the joystick input so for low joystick values, the
+ * scaled value is less than linear.  This is to make it easier to drive
+ * the robot more precisely at slower speeds.
+ */
+  double scaleInput(double dVal)  {
+    double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
+            0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
+
+    // get the corresponding index for the scaleInput array.
+    int index = (int) (dVal * 16.0);
+
+    // index should be positive.
+    if (index < 0) {
+      index = -index;
+    }
+
+    // index cannot exceed size of array minus 1.
+    if (index > 16) {
+      index = 16;
+    }
+
+    // get value from the array.
+    double dScale = 0.0;
+    if (dVal < 0) {
+      dScale = -scaleArray[index];
+    } else {
+      dScale = scaleArray[index];
+    }
+
+    // return scaled value.
+    return dScale;
   }
 }
