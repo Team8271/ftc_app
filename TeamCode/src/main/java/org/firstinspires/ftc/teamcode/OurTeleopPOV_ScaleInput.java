@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
@@ -17,9 +16,9 @@ import com.qualcomm.robotcore.util.Range;
  *
  */
 
-@TeleOp(name="Teleop POV", group="Linear")
+@TeleOp(name="Scaled Teleop POV", group="Linear")
 //@Disabled
-public class OurTeleopPOV extends LinearOpMode {
+public class OurTeleopPOV_ScaleInput extends LinearOpMode {
 
   /* Declare Hardware */
   OurRobotHardwareSetup robot = new OurRobotHardwareSetup();   // Use a hardware setup class
@@ -47,8 +46,8 @@ public class OurTeleopPOV extends LinearOpMode {
 
       // POV Mode uses left stick to go forward, and right stick to turn.
       // - This uses basic math to combine motions and is easier to drive straight.
-        double drive = (-gamepad1.left_stick_y);
-        double turn  = (gamepad1.right_stick_x);
+        double drive = scaleInput(-gamepad1.left_stick_y);
+        double turn  = scaleInput(gamepad1.right_stick_x);
 
       // Clip joystick values to be withing the range of the allowable motor power levels
       leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
@@ -94,4 +93,38 @@ public class OurTeleopPOV extends LinearOpMode {
       //sleep(50); not sure this is needed
     }
   }
+    /*
+   * This method scales the joystick input so for low joystick values, the
+   * scaled value is less than linear.  This is to make it easier to drive
+   * the robot more precisely at slower speeds.
+   */
+    double scaleInput(double dVal)  {
+        double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
+                0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
+
+        // get the corresponding index for the scaleInput array.
+        int index = (int) (dVal * 16.0);
+
+        // index should be positive.
+        if (index < 0) {
+            index = -index;
+        }
+
+        // index cannot exceed size of array minus 1.
+        if (index > 16) {
+            index = 16;
+        }
+
+        // get value from the array.
+        double dScale = 0.0;
+        if (dVal < 0) {
+            dScale = -scaleArray[index];
+        } else {
+            dScale = scaleArray[index];
+        }
+
+        // return scaled value.
+        return dScale;
+    }
+
 }
