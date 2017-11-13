@@ -58,22 +58,22 @@ public class OurTeleopPOV_ScaleInput extends LinearOpMode {
       robot.motorRight.setPower(rightPower);
 
       //Servo commands
-      if(gamepad1.a) //button 'a' will open
+      if(gamepad2.a) //button 'a' will open
       {
-        robot.servoHandR.setPosition(robot.OPEN);
-        robot.servoHandL.setPosition(robot.CLOSED);
+        robot.servoHandR.setPosition(0.6);
+        robot.servoHandL.setPosition(0.4);
       }
-      else if (gamepad1.b) //button 'b' will close
+      else if (gamepad2.b) //button 'b' will close
       {
-        robot.servoHandR.setPosition(robot.CLOSED);
-        robot.servoHandL.setPosition(robot.OPEN);
+        robot.servoHandR.setPosition(0.2);
+        robot.servoHandL.setPosition(0.8);
       }
 
       // Arm Control - Uses dual buttons to control motor direction
-      double armUp = gamepad1.right_trigger/2.0;
-      double armDown = -gamepad1.right_trigger/2.0;
+      double armUp = gamepad2.right_trigger/2.0;
+      double armDown = -gamepad2.right_trigger/2.0;
 
-      if(gamepad1.right_bumper)
+      if(gamepad2.right_bumper)
       {
         robot.motorArm.setPower(armDown); // if both Bumper + Trigger, then negative power, runs arm down
       }
