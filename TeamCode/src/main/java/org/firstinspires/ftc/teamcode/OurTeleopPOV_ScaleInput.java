@@ -68,9 +68,13 @@ public class OurTeleopPOV_ScaleInput extends LinearOpMode {
         robot.servoHandR.setPosition(0.2);
         robot.servoHandL.setPosition(0.8);
       }
-
+      else if (gamepad2.x) //button 'x' will grab relic
+      {
+          robot.servoHandR.setPosition(.1);
+          robot.servoHandL.setPosition(.9);
+      }
       // Arm Control - Uses dual buttons to control motor direction
-      double armUp = gamepad2.right_trigger/2.0;
+/*      double armUp = gamepad2.right_trigger/2.0;
       double armDown = -gamepad2.right_trigger/2.0;
 
       if(gamepad2.right_bumper)
@@ -81,6 +85,9 @@ public class OurTeleopPOV_ScaleInput extends LinearOpMode {
       {
         robot.motorArm.setPower(armUp);  // else trigger positive value, runs arm up
       }
+*/
+      //Arm Control - Uses right joystick to control motor direction
+        robot.motorArm.setPower(-gamepad2.right_stick_y/2);
 
       // Send telemetry message to signify robot running;
       telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
