@@ -16,7 +16,7 @@ import com.qualcomm.robotcore.util.Range;
  *
  */
 
-@TeleOp(name="Scaled Teleop POV", group="Linear")
+@TeleOp(name="Scaled Teleop POV", group="Competition")
 //@Disabled
 public class OurTeleopPOV_ScaleInput extends LinearOpMode {
 

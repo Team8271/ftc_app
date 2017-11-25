@@ -98,8 +98,8 @@ public class OurRobotHardwareSetup {
         //crServo    = hwMap.servo.get("crServo");
 
         //Set servo hand grippers to open position.
-        servoHandL.setPosition(0.6);
-        servoHandR.setPosition(0.4);
+        servoHandL.setPosition(0.75);
+        servoHandR.setPosition(0.275);
 
         //Continous Rotation Servo
         //crServo.setPosition(STOP);

@@ -33,11 +33,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * This file contains an minimal example of a Linear Autonomous "OpMode".
@@ -48,9 +44,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Don't forget to comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Knight AutoByTime", group="Competetion")  // @TeleOp(...) is the other common choice
+@Autonomous(name="Knight AutoByTimeRed", group="Competetion")  // @TeleOp(...) is the other common choice
 //@Disabled
-public class KnightAutoDriveByTime extends LinearOpMode {
+public class KnightAutoDriveByTimeRed extends LinearOpMode {
 
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup();
 
@@ -69,12 +65,18 @@ public class KnightAutoDriveByTime extends LinearOpMode {
         /************************
          * Autonomous Code Below://
          *************************/
-        robot.servoHandL.setPosition(0.75);
-        robot.servoHandR.setPosition(0.275);
+        //close
+        robot.servoHandL.setPosition(0.8);
+        robot.servoHandR.setPosition(0.2);
 
-        DriveForwardTime(DRIVE_POWER, 1000);
-        //TurnLeft(DRIVE_POWER, 1000);
-        //StopDrivingTime(2000);
+        DriveForwardTime(DRIVE_POWER, 1100);
+        TurnRight(0.5, 750);
+        StopDrivingTime(1000);
+        DriveForwardTime(DRIVE_POWER, 500);
+        //open
+        robot.servoHandL.setPosition(0.5);
+        robot.servoHandR.setPosition(0.5);
+        DriveForwardTime(-0.5,200);
 
 /*        DriveForwardTime(DRIVE_POWER, 4000);
         TurnRight(DRIVE_POWER, 1000);
