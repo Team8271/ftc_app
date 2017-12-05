@@ -44,7 +44,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Don't forget to comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Knight AutoByTimeRedV2", group="Competetion")  // @TeleOp(...) is the other common choice
+@Autonomous(name="Knight AutoByTimeRedV2", group="KnightAutonomous")  // @TeleOp(...) is the other common choice
 //@Disabled
 public class KnightAutoDriveByTimeRedV2 extends LinearOpMode {
 
@@ -66,6 +66,7 @@ public class KnightAutoDriveByTimeRedV2 extends LinearOpMode {
          * Autonomous Code Below://
          *************************/
         //close
+
         DriveForwardTime(DRIVE_POWER,1000);
         StopDrivingTime(500);
         TurnLeft(DRIVE_POWER,400);

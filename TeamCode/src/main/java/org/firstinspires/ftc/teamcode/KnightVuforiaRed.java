@@ -29,22 +29,15 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaNavigation;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
-import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuMarkInstanceId;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 /**
@@ -59,9 +52,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * is explained in {@link ConceptVuforiaNavigation}.
  */
 
-@Autonomous(name="KnightVuforia", group ="Competition")
+@Autonomous(name="KnightVuforiaRed", group ="KnightAutonomous")
 //@Disabled
-public class KnightVuforia extends LinearOpMode {
+public class KnightVuforiaRed extends LinearOpMode {
 
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup(); //get hardware members from HardwareSetUp class
 
@@ -145,22 +138,55 @@ public class KnightVuforia extends LinearOpMode {
                     robot.servoHandL.setPosition(0.8);
                     robot.servoHandR.setPosition(0.2);
 
-                    DriveForwardTime(DRIVE_POWER, 1100);
-                    TurnLeft(0.5, 750);
+                    DriveForwardTime(DRIVE_POWER, 1800);
+                    StopDrivingTime(500);
+                    TurnRight(0.5, 800);
                     StopDrivingTime(1000);
                     DriveForwardTime(DRIVE_POWER, 500);
                     //open
                     robot.servoHandL.setPosition(0.5);
                     robot.servoHandR.setPosition(0.5);
-                    DriveForwardTime(-0.5,200);
+                    DriveForwardTime(-0.25,20);
 
                 }
                 else if (vuMark == RelicRecoveryVuMark.CENTER){
-                    // autonomous code here...
+                    // autonomous code here..
+                    //close
+                    robot.servoHandL.setPosition(0.8);
+                    robot.servoHandR.setPosition(0.2);
+
+                    DriveForwardTime(DRIVE_POWER, 2300);
+                    StopDrivingTime(500);
+                    TurnRight(0.5,800);
+                    StopDrivingTime(500);
+                    DriveForwardTime(DRIVE_POWER,500);
+                    //open
+                    robot.servoHandL.setPosition(0.5);
+                    robot.servoHandR.setPosition(0.5);
+                    DriveForwardTime(-0.25,20);
+
 
                 }
                 else if (vuMark == RelicRecoveryVuMark.RIGHT){
                     // autonomous code here...
+                    //close
+
+                    robot.servoHandL.setPosition(0.8);
+                    robot.servoHandR.setPosition(0.2);
+
+                    DriveForwardTime(DRIVE_POWER, 2150);
+                    StopDrivingTime(500);
+                    TurnRight(0.5,400);
+                    StopDrivingTime(200);
+                    DriveForwardTime(0.5,150);
+                    StopDrivingTime(500);
+                    TurnRight(0.5,400);
+                    DriveForwardTime(DRIVE_POWER,500);
+                    //open
+                    robot.servoHandL.setPosition(0.5);
+                    robot.servoHandR.setPosition(0.5);
+                    DriveForwardTime(-0.25,20);
+
 
                 }
 
@@ -177,7 +203,7 @@ public class KnightVuforia extends LinearOpMode {
 
     /** Below: Basic Drive Methods used in Autonomous code...**/
     //set Drive Power variable
-    double DRIVE_POWER = 1.0;
+    double DRIVE_POWER = .5;
 
     public void DriveForward(double power)
     {
