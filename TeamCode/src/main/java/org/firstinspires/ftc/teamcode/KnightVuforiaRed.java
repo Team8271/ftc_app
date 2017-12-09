@@ -132,13 +132,13 @@ public class KnightVuforiaRed extends LinearOpMode {
                 // for each TemplateID found.
                 // the run motor test can be replaced by your desired autonomous code.
 
-                if (vuMark == RelicRecoveryVuMark.LEFT) {
+                if (vuMark == RelicRecoveryVuMark.RIGHT) {
                     // autonomous code here...
                     //close
                     robot.servoHandL.setPosition(0.8);
                     robot.servoHandR.setPosition(0.2);
 
-                    DriveForwardTime(DRIVE_POWER, 1800);
+                    DriveForwardTime(DRIVE_POWER, 2100);
                     StopDrivingTime(500);
                     TurnRight(0.5, 800);
                     StopDrivingTime(1000);
@@ -155,7 +155,7 @@ public class KnightVuforiaRed extends LinearOpMode {
                     robot.servoHandL.setPosition(0.8);
                     robot.servoHandR.setPosition(0.2);
 
-                    DriveForwardTime(DRIVE_POWER, 2300);
+                    DriveForwardTime(DRIVE_POWER, 2550);
                     StopDrivingTime(500);
                     TurnRight(0.5,800);
                     StopDrivingTime(500);
@@ -167,7 +167,7 @@ public class KnightVuforiaRed extends LinearOpMode {
 
 
                 }
-                else if (vuMark == RelicRecoveryVuMark.RIGHT){
+                else if (vuMark == RelicRecoveryVuMark.LEFT){
                     // autonomous code here...
                     //close
 
@@ -178,7 +178,7 @@ public class KnightVuforiaRed extends LinearOpMode {
                     StopDrivingTime(500);
                     TurnRight(0.5,400);
                     StopDrivingTime(200);
-                    DriveForwardTime(0.5,150);
+                    DriveForwardTime(0.5,350);
                     StopDrivingTime(500);
                     TurnRight(0.5,400);
                     DriveForwardTime(DRIVE_POWER,500);

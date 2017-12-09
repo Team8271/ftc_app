@@ -49,9 +49,17 @@ public class OurTeleopPOV_ScaleInput extends LinearOpMode {
         double drive = scaleInput(-gamepad1.left_stick_y);
         double turn  = scaleInput(gamepad1.right_stick_x);
 
+        while (opModeIsActive()) {
+            int div = 0;
+            if (gamepad1.x);
+        }
+
+
+
       // Clip joystick values to be withing the range of the allowable motor power levels
       leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
       rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+
 
       // Send calculated power to wheels
       robot.motorLeft.setPower(leftPower);

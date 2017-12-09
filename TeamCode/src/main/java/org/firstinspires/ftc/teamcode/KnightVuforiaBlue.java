@@ -145,7 +145,7 @@ public class KnightVuforiaBlue extends LinearOpMode {
                     robot.servoHandL.setPosition(0.8);
                     robot.servoHandR.setPosition(0.2);
 
-                    DriveForwardTime(DRIVE_POWER, 1800);
+                    DriveForwardTime(DRIVE_POWER, 1900);
                     StopDrivingTime(500);
                     TurnLeft(0.5, 800);
                     StopDrivingTime(1000);
@@ -162,9 +162,9 @@ public class KnightVuforiaBlue extends LinearOpMode {
                     robot.servoHandL.setPosition(0.8);
                     robot.servoHandR.setPosition(0.2);
 
-                    DriveForwardTime(DRIVE_POWER, 2200);
+                    DriveForwardTime(DRIVE_POWER, 2400);
                     StopDrivingTime(500);
-                    TurnLeft(0.5,1000);
+                    TurnLeft(0.5,800);
                     StopDrivingTime(500);
                     DriveForwardTime(DRIVE_POWER,500);
                     //open
@@ -180,7 +180,7 @@ public class KnightVuforiaBlue extends LinearOpMode {
                     StopDrivingTime(500);
                     TurnLeft(0.5,400);
                     StopDrivingTime(200);
-                    DriveForwardTime(0.5,150);
+                    DriveForwardTime(0.5,350);
                     StopDrivingTime(500);
                     TurnLeft(0.5,400);
                     DriveForwardTime(DRIVE_POWER,500);
