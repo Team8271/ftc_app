@@ -29,22 +29,15 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaNavigation;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
-import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuMarkInstanceId;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 /**
@@ -61,9 +54,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 
 
-    @Autonomous(name = "KnightVuforiaBlue", group = "KnightAutonomous")
+    @Autonomous(name = "KnightVuforiaBlue2", group = "KnightAutonomous")
 //@Disabled
-    public class KnightVuforiaBlue extends LinearOpMode {
+    public class KnightVuforiaBlue2 extends LinearOpMode {
 
         OurRobotHardwareSetup robot = new OurRobotHardwareSetup(); //get hardware members from HardwareSetUp class
 
@@ -150,9 +143,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
                         DriveForwardTime(DRIVE_POWER, 1900);
                         StopDrivingTime(500);
-                        TurnLeft(0.5, 800);
+                        TurnRight(0.5, 1000);
                         StopDrivingTime(1000);
-                        DriveForwardTime(DRIVE_POWER, 500);
+                        DriveForwardTime(DRIVE_POWER, 200);
+                        StopDrivingTime(500);
+                        TurnLeft(0.5,1000);
                         //open
                         robot.servoHandL.setPosition(0.5);
                         robot.servoHandR.setPosition(0.5);

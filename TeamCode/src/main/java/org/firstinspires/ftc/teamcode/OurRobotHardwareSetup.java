@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 
 
 /**
@@ -36,6 +37,7 @@ public class OurRobotHardwareSetup {
     //servos
     public Servo servoHandL = null;
     public Servo servoHandR = null;
+    public Servo servoHandl = null;
     //public Servo crServo    = null;
 
     //sensors
@@ -54,6 +56,10 @@ public class OurRobotHardwareSetup {
     double SpinRight = 0.6;
     double STOP = 0.5;
 
+    public ColorSensor colorsensor = null;
+
+    double Red = 60;
+    double Blue = 20;
    /* Constructor   // this is not required as JAVA does it for you, but useful if you want to add
     * function to this method when called in OpModes.
     */
@@ -72,6 +78,8 @@ public class OurRobotHardwareSetup {
         motorLeft = hwMap.dcMotor.get("motorL");
         motorRight = hwMap.dcMotor.get("motorR");
         motorArm = hwMap.dcMotor.get("motorArm");
+
+        colorsensor = hwMap.colorSensor.get("color");
 
         // Set the drive motor directions:
         motorLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
@@ -101,6 +109,9 @@ public class OurRobotHardwareSetup {
         servoHandL.setPosition(0.75);
         servoHandR.setPosition(0.275);
 
+        servoHandl.setPosition(0.75);
+        servoHandR.setPosition(0.275);
+
         //Continous Rotation Servo
         //crServo.setPosition(STOP);
 
@@ -109,6 +120,13 @@ public class OurRobotHardwareSetup {
          ************************************************************/
         //Define sensors
         //gyro = hwMap.gyroSensor.get("gyro");
+
+
+
+
+
+
+
    }
 
 }

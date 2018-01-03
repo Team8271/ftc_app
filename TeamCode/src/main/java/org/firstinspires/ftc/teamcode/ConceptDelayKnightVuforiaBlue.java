@@ -29,22 +29,16 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaNavigation;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
-import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuMarkInstanceId;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 /**
@@ -61,9 +55,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 
 
-    @Autonomous(name = "KnightVuforiaBlue", group = "KnightAutonomous")
+    @Autonomous(name = "ConceptDelayKnightVuforiaBlue", group = "Concept")
 //@Disabled
-    public class KnightVuforiaBlue extends LinearOpMode {
+    public class ConceptDelayKnightVuforiaBlue extends LinearOpMode {
+
+    private  ElapsedTime timer = new ElapsedTime(); //create timer to monitor elapsed time
 
         OurRobotHardwareSetup robot = new OurRobotHardwareSetup(); //get hardware members from HardwareSetUp class
 
@@ -121,6 +117,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
             relicTrackables.activate();
 
+            //timer.reset();
+            this.resetStartTime();
+
             while (opModeIsActive()) {
 
                 /**
@@ -132,7 +131,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
                 RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate); // vuMark gets value from relicTemplate
 
-                if (vuMark != RelicRecoveryVuMark.UNKNOWN) // if vuMark is NOT UNKNOWN run autoCode for value seen
+                if (vuMark != RelicRecoveryVuMark.UNKNOWN || time > 18000) // if vuMark is NOT UNKNOWN run autoCode for value seen
                 {
 
                     telemetry.addData("VuMark", "%s visible", vuMark);
@@ -189,8 +188,27 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                         robot.servoHandL.setPosition(0.5);
                         robot.servoHandR.setPosition(0.5);
                         DriveForwardTime(-0.25, 20);
+                    }
+
+                    else if (vuMark != RelicRecoveryVuMark.UNKNOWN  || timer.milliseconds() > 20000) {
+                        // Default
+                        //Place in Center
+                        robot.servoHandL.setPosition(0.8);
+                        robot.servoHandR.setPosition(0.2);
+
+                        DriveForwardTime(DRIVE_POWER, 2400);
+                        StopDrivingTime(500);
+                        TurnLeft(0.5, 800);
+                        StopDrivingTime(500);
+                        DriveForwardTime(DRIVE_POWER, 500);
+                        //open
+                        robot.servoHandL.setPosition(0.5);
+                        robot.servoHandR.setPosition(0.5);
+                        DriveForwardTime(-0.25, 20);
+
 
                     }
+
 
                     break; //exit opModeIsActive loop
                 } else {
