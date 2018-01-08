@@ -55,7 +55,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 
 
-    @Autonomous(name = "ConceptDelayKnightVuforiaBlue", group = "Concept")
+    @Autonomous(name = "ConceptDelayKnightVuforiaRed", group = "Concept")
 //@Disabled
     public class ConceptDelayKnightVuforiaRed extends LinearOpMode {
 

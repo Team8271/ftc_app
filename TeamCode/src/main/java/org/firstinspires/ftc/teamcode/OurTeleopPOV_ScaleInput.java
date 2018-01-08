@@ -70,14 +70,20 @@ public class OurTeleopPOV_ScaleInput extends LinearOpMode {
             {
                 robot.servoHandR.setPosition(0.6);
                 robot.servoHandL.setPosition(0.4);
+                robot.servoHandr.setPosition(0.6);
+                robot.servoHandl.setPosition(0.4);
             } else if (gamepad2.b) //button 'b' will close
             {
                 robot.servoHandR.setPosition(0.2);
                 robot.servoHandL.setPosition(0.8);
+                robot.servoHandr.setPosition(0.2);
+                robot.servoHandl.setPosition(0.8);
             } else if (gamepad2.x) //button 'x' will grab relic
             {
-                robot.servoHandR.setPosition(.1);
-                robot.servoHandL.setPosition(.9);
+                robot.servoHandR.setPosition(0.1);
+                robot.servoHandL.setPosition(0.9);
+                robot.servoHandr.setPosition(0.1);
+                robot.servoHandl.setPosition(0.9);
             }
 
                     // Arm Control - Uses dual buttons to control motor direction

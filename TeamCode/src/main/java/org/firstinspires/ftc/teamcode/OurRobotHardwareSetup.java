@@ -38,6 +38,7 @@ public class OurRobotHardwareSetup {
     public Servo servoHandL = null;
     public Servo servoHandR = null;
     public Servo servoHandl = null;
+    public Servo servoHandr = null;
     //public Servo crServo    = null;
 
     //sensors
@@ -79,7 +80,7 @@ public class OurRobotHardwareSetup {
         motorRight = hwMap.dcMotor.get("motorR");
         motorArm = hwMap.dcMotor.get("motorArm");
 
-        colorsensor = hwMap.colorSensor.get("color");
+        //colorsensor = hwMap.colorSensor.get("color");
 
         // Set the drive motor directions:
         motorLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
@@ -103,14 +104,16 @@ public class OurRobotHardwareSetup {
         // Define Motors to match Robot Configuration File
         servoHandL = hwMap.servo.get("servoHandL");
         servoHandR = hwMap.servo.get("servoHandR");
+        servoHandL = hwMap.servo.get("servoHandl");
+        servoHandr = hwMap.servo.get("servoHandr");
         //crServo    = hwMap.servo.get("crServo");
 
         //Set servo hand grippers to open position.
         servoHandL.setPosition(0.75);
-        servoHandR.setPosition(0.275);
+        servoHandR.setPosition(0.27);
 
         servoHandl.setPosition(0.75);
-        servoHandR.setPosition(0.275);
+        servoHandr.setPosition(0.27);
 
         //Continous Rotation Servo
         //crServo.setPosition(STOP);
