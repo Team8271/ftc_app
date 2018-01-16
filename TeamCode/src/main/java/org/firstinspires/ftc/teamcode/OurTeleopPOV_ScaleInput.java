@@ -47,13 +47,14 @@ public class OurTeleopPOV_ScaleInput extends LinearOpMode {
         // POV Mode uses left stick to go forward, and right stick to turn.
         // - This uses basic math to combine motions and is easier to drive straight.
 
+        //drive and turn
         double drive = (-gamepad1.left_stick_y);
         double turn = (gamepad1.right_stick_x);
 
         // Clip joystick values to be withing the range of the allowable motor power levels
         leftPower = Range.clip(drive + turn, -1.0, 1.0);
         rightPower = Range.clip(drive - turn, -1.0, 1.0);
-
+            //button that halves values in which makes for more accurate movements.
             int div = 0;
             if (gamepad1.right_bumper) {
                 div = 2;
@@ -66,25 +67,24 @@ public class OurTeleopPOV_ScaleInput extends LinearOpMode {
             robot.motorRight.setPower(rightPower / div);
 
             //Servo commands
-            if (gamepad2.a) //button 'a' will open
+            if (gamepad2.a) //button 'a' will open top servos
             {
-                robot.servoHandR.setPosition(0.6);
-                robot.servoHandL.setPosition(0.4);
-                robot.servoHandr.setPosition(0.6);
-                robot.servoHandl.setPosition(0.4);
-            } else if (gamepad2.b) //button 'b' will close
+                robot.servoHandTopRight.setPosition(0.2);
+                robot.servoHandTopLeft.setPosition(0.8);
+                robot.servoHandBottomRight.setPosition(0.2);
+                robot.servoHandBottomLeft.setPosition(0.8);
+
+            } else if (gamepad2.b) //button 'b' will close top servos
             {
-                robot.servoHandR.setPosition(0.2);
-                robot.servoHandL.setPosition(0.8);
-                robot.servoHandr.setPosition(0.2);
-                robot.servoHandl.setPosition(0.8);
-            } else if (gamepad2.x) //button 'x' will grab relic
-            {
-                robot.servoHandR.setPosition(0.1);
-                robot.servoHandL.setPosition(0.9);
-                robot.servoHandr.setPosition(0.1);
-                robot.servoHandl.setPosition(0.9);
+                robot.servoHandTopRight.setPosition(0.85);
+                robot.servoHandTopLeft.setPosition(0.15);
+                robot.servoHandBottomRight.setPosition(0.85);
+                robot.servoHandBottomLeft.setPosition(0.15);
+
             }
+
+
+
 
                     // Arm Control - Uses dual buttons to control motor direction
         /*      double armUp = gamepad2.right_trigger/2.0;
@@ -121,4 +121,4 @@ public class OurTeleopPOV_ScaleInput extends LinearOpMode {
 
     }//While OpMode Active
   }//run opMode
-}//Linear OpMod
+}//Linear OpMode

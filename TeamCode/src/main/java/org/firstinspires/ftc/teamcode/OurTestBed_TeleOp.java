@@ -92,13 +92,13 @@ public class OurTestBed_TeleOp extends LinearOpMode {
             //servo commands
             if(gamepad1.a) //button 'a' will open
             {
-                robot.servoHandR.setPosition(robot.OPEN);
-                robot.servoHandL.setPosition(robot.OPEN);
+                robot.servoHandTopRight.setPosition(robot.OPEN);
+                robot.servoHandTopLeft.setPosition(robot.OPEN);
             }
             else if (gamepad1.b) //button 'b' will close
             {
-                robot.servoHandR.setPosition(robot.CLOSED);
-                robot.servoHandL.setPosition(robot.CLOSED);
+                robot.servoHandTopRight.setPosition(robot.CLOSED);
+                robot.servoHandTopLeft.setPosition(robot.CLOSED);
             }
 
 /*

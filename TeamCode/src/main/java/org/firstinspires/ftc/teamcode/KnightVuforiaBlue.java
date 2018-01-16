@@ -145,8 +145,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                     if (vuMark == RelicRecoveryVuMark.LEFT) {
                         // autonomous code here...
                         //close
-                        robot.servoHandL.setPosition(0.8);
-                        robot.servoHandR.setPosition(0.2);
+                        robot.servoHandBottomLeft.setPosition(0.6);
+                        robot.servoHandBottomRight.setPosition(0.4);
+                        robot.servoHandTopLeft.setPosition(0.6);
+                        robot.servoHandTopRight.setPosition(0.4);
 
                         DriveForwardTime(DRIVE_POWER, 1900);
                         StopDrivingTime(500);
@@ -154,19 +156,19 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                         StopDrivingTime(1000);
                         DriveForwardTime(DRIVE_POWER, 500);
                         //open
-                        robot.servoHandL.setPosition(0.5);
-                        robot.servoHandR.setPosition(0.5);
-                        robot.servoHandl.setPosition(0.5);
-                        robot.servoHandr.setPosition(0.5);
+                        robot.servoHandTopLeft.setPosition(0.8);
+                        robot.servoHandTopRight.setPosition(0.2);
+                        robot.servoHandBottomLeft.setPosition(0.8);
+                        robot.servoHandBottomRight.setPosition(0.2);
                         DriveForwardTime(-0.25, 20);
 
                     } else if (vuMark == RelicRecoveryVuMark.CENTER) {
                         // autonomous code here..
                         //close
-                        robot.servoHandL.setPosition(0.8);
-                        robot.servoHandR.setPosition(0.2);
-                        robot.servoHandl.setPosition(0.8);
-                        robot.servoHandr.setPosition(0.2);
+                        robot.servoHandTopLeft.setPosition(0.6);
+                        robot.servoHandTopRight.setPosition(0.4);
+                        robot.servoHandBottomLeft.setPosition(0.6);
+                        robot.servoHandBottomRight.setPosition(0.4);
 
                         DriveForwardTime(DRIVE_POWER, 2400);
                         StopDrivingTime(500);
@@ -174,14 +176,20 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                         StopDrivingTime(500);
                         DriveForwardTime(DRIVE_POWER, 500);
                         //open
-                        robot.servoHandL.setPosition(0.5);
-                        robot.servoHandR.setPosition(0.5);
-                        robot.servoHandl.setPosition(0.5);
-                        robot.servoHandr.setPosition(0.5);
+                        robot.servoHandTopLeft.setPosition(0.8);
+                        robot.servoHandTopRight.setPosition(0.2);
+                        robot.servoHandBottomLeft.setPosition(0.8);
+                        robot.servoHandBottomRight.setPosition(0.2);
                         DriveForwardTime(-0.25, 20);
 
 
                     } else if (vuMark == RelicRecoveryVuMark.RIGHT) {
+
+                        robot.servoHandTopLeft.setPosition(0.6);
+                        robot.servoHandTopRight.setPosition(0.4);
+                        robot.servoHandBottomLeft.setPosition(0.6);
+                        robot.servoHandBottomRight.setPosition(0.4);
+
 
                         DriveForwardTime(DRIVE_POWER, 2150);
                         StopDrivingTime(500);
@@ -192,10 +200,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                         TurnLeft(0.5, 400);
                         DriveForwardTime(DRIVE_POWER, 500);
                         //open
-                        robot.servoHandL.setPosition(0.5);
-                        robot.servoHandR.setPosition(0.5);
-                        robot.servoHandl.setPosition(0.5);
-                        robot.servoHandr.setPosition(0.5);
+                        robot.servoHandTopLeft.setPosition(0.8);
+                        robot.servoHandTopRight.setPosition(0.2);
+                        robot.servoHandBottomLeft.setPosition(0.8);
+                        robot.servoHandBottomRight.setPosition(0.2);
                         DriveForwardTime(-0.25, 20);
 
                     }

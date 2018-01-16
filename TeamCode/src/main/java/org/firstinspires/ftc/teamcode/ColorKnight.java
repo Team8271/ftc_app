@@ -102,12 +102,12 @@ public class ColorKnight extends LinearOpMode {
 
 
         //to here
-        telemetry.addData("Red  ", robot.colorsensor.red());
-        telemetry.addData("Blue ", robot.colorsensor.blue());
+        telemetry.addData("Red  ", robot.colorsensorL.red());
+        telemetry.addData("Blue ", robot.colorsensorL.blue());
 
         telemetry.update();
 
-        if (robot.colorsensor.red() > robot.Red) {
+        if (robot.colorsensorL.red() > robot.Red) {
             //do this
 
 
@@ -119,7 +119,7 @@ public class ColorKnight extends LinearOpMode {
 
 
         }
-        else if (robot.colorsensor.blue() > robot.Blue){
+        else if (robot.colorsensorL.blue() > robot.Blue){
             //else if (r.colorsensor.red() < r.Red && r.colorsensor.red() >r.Red2) {
             //do this
 
@@ -131,8 +131,8 @@ public class ColorKnight extends LinearOpMode {
         }
 
         else {
-            telemetry.addData("Red  ", robot.colorsensor.red());
-            telemetry.addData("Blue ", robot.colorsensor.blue());
+            telemetry.addData("Red  ", robot.colorsensorL.red());
+            telemetry.addData("Blue ", robot.colorsensorL.blue());
             telemetry.addData("Color", "NOT VISIBLE"); // else if color IS UNKNOWN display NOT VISABLE
             telemetry.update();
         }
@@ -158,8 +158,8 @@ public class ColorKnight extends LinearOpMode {
         {
             vuMark = RelicRecoveryVuMark.from(relicTemplate); // vuMark gets value from relicTemplate
         }
-        telemetry.addData("Red  ", robot.colorsensor.red());
-        telemetry.addData("Blue ", robot.colorsensor.blue());
+        telemetry.addData("Red  ", robot.colorsensorL.red());
+        telemetry.addData("Blue ", robot.colorsensorL.blue());
 
         telemetry.addData("VuMark", "%s visible", vuMark);
         telemetry.update();
@@ -171,8 +171,8 @@ public class ColorKnight extends LinearOpMode {
         if (vuMark == RelicRecoveryVuMark.LEFT) {
             // autonomous code here...
             //close
-            robot.servoHandL.setPosition(0.8);
-            robot.servoHandR.setPosition(0.2);
+            robot.servoHandTopLeft.setPosition(0.8);
+            robot.servoHandTopRight.setPosition(0.2);
 
             DriveForwardTime(DRIVE_POWER, 1900);
             StopDrivingTime(500);
@@ -180,15 +180,15 @@ public class ColorKnight extends LinearOpMode {
             StopDrivingTime(1000);
             DriveForwardTime(DRIVE_POWER, 500);
             //open
-            robot.servoHandL.setPosition(0.5);
-            robot.servoHandR.setPosition(0.5);
+            robot.servoHandTopLeft.setPosition(0.5);
+            robot.servoHandTopRight.setPosition(0.5);
             DriveForwardTime(-0.25, 20);
 
         } else if (vuMark == RelicRecoveryVuMark.CENTER) {
             // autonomous code here..
             //close
-            robot.servoHandL.setPosition(0.8);
-            robot.servoHandR.setPosition(0.2);
+            robot.servoHandTopLeft.setPosition(0.8);
+            robot.servoHandTopRight.setPosition(0.2);
 
             DriveForwardTime(DRIVE_POWER, 2400);
             StopDrivingTime(500);
@@ -196,8 +196,8 @@ public class ColorKnight extends LinearOpMode {
             StopDrivingTime(500);
             DriveForwardTime(DRIVE_POWER, 500);
             //open
-            robot.servoHandL.setPosition(0.5);
-            robot.servoHandR.setPosition(0.5);
+            robot.servoHandTopLeft.setPosition(0.5);
+            robot.servoHandTopRight.setPosition(0.5);
             DriveForwardTime(-0.25, 20);
 
 
@@ -212,8 +212,8 @@ public class ColorKnight extends LinearOpMode {
             TurnLeft(0.5, 400);
             DriveForwardTime(DRIVE_POWER, 500);
             //open
-            robot.servoHandL.setPosition(0.5);
-            robot.servoHandR.setPosition(0.5);
+            robot.servoHandTopLeft.setPosition(0.5);
+            robot.servoHandTopRight.setPosition(0.5);
             DriveForwardTime(-0.25, 20);
 
         }

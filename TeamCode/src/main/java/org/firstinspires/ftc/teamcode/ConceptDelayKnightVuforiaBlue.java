@@ -145,8 +145,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                     if (vuMark == RelicRecoveryVuMark.LEFT) {
                         // autonomous code here...
                         //close
-                        robot.servoHandL.setPosition(0.8);
-                        robot.servoHandR.setPosition(0.2);
+                        robot.servoHandTopLeft.setPosition(0.8);
+                        robot.servoHandTopRight.setPosition(0.2);
 
                         DriveForwardTime(DRIVE_POWER, 1900);
                         StopDrivingTime(500);
@@ -154,15 +154,15 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                         StopDrivingTime(1000);
                         DriveForwardTime(DRIVE_POWER, 500);
                         //open
-                        robot.servoHandL.setPosition(0.5);
-                        robot.servoHandR.setPosition(0.5);
+                        robot.servoHandTopLeft.setPosition(0.5);
+                        robot.servoHandTopRight.setPosition(0.5);
                         DriveForwardTime(-0.25, 20);
 
                     } else if (vuMark == RelicRecoveryVuMark.CENTER) {
                         // autonomous code here..
                         //close
-                        robot.servoHandL.setPosition(0.8);
-                        robot.servoHandR.setPosition(0.2);
+                        robot.servoHandTopLeft.setPosition(0.8);
+                        robot.servoHandTopRight.setPosition(0.2);
 
                         DriveForwardTime(DRIVE_POWER, 2400);
                         StopDrivingTime(500);
@@ -170,8 +170,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                         StopDrivingTime(500);
                         DriveForwardTime(DRIVE_POWER, 500);
                         //open
-                        robot.servoHandL.setPosition(0.5);
-                        robot.servoHandR.setPosition(0.5);
+                        robot.servoHandTopLeft.setPosition(0.5);
+                        robot.servoHandTopRight.setPosition(0.5);
                         DriveForwardTime(-0.25, 20);
 
 
@@ -186,16 +186,16 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                         TurnLeft(0.5, 400);
                         DriveForwardTime(DRIVE_POWER, 500);
                         //open
-                        robot.servoHandL.setPosition(0.5);
-                        robot.servoHandR.setPosition(0.5);
+                        robot.servoHandTopLeft.setPosition(0.5);
+                        robot.servoHandTopRight.setPosition(0.5);
                         DriveForwardTime(-0.25, 20);
                     }
 
                     else if (vuMark != RelicRecoveryVuMark.UNKNOWN  || timer.milliseconds() > 20000) {
                         // Default
                         //Place in Center
-                        robot.servoHandL.setPosition(0.8);
-                        robot.servoHandR.setPosition(0.2);
+                        robot.servoHandTopLeft.setPosition(0.8);
+                        robot.servoHandTopRight.setPosition(0.2);
 
                         DriveForwardTime(DRIVE_POWER, 2400);
                         StopDrivingTime(500);
@@ -203,8 +203,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                         StopDrivingTime(500);
                         DriveForwardTime(DRIVE_POWER, 500);
                         //open
-                        robot.servoHandL.setPosition(0.5);
-                        robot.servoHandR.setPosition(0.5);
+                        robot.servoHandTopLeft.setPosition(0.5);
+                        robot.servoHandTopRight.setPosition(0.5);
                         DriveForwardTime(-0.25, 20);
 
 

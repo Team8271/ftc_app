@@ -69,8 +69,8 @@ public class KnightAutoDriveByTime extends LinearOpMode {
         /************************
          * Autonomous Code Below://
          *************************/
-        robot.servoHandL.setPosition(0.75);
-        robot.servoHandR.setPosition(0.275);
+        robot.servoHandTopLeft.setPosition(0.75);
+        robot.servoHandTopRight.setPosition(0.275);
 
         DriveForwardTime(DRIVE_POWER, 1000);
         //TurnLeft(DRIVE_POWER, 1000);

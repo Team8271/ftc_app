@@ -1,7 +1,6 @@
 
 package org.firstinspires.ftc.teamcode;
 
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -35,14 +34,18 @@ public class OurRobotHardwareSetup {
     public DcMotor motorArm = null;
 
     //servos
-    public Servo servoHandL = null;
-    public Servo servoHandR = null;
-    public Servo servoHandl = null;
-    public Servo servoHandr = null;
+    public Servo servoHandTopLeft = null;
+    public Servo servoHandTopRight = null;
+    public Servo servoHandBottomLeft = null;
+    public Servo servoHandBottomRight = null;
+    public Servo colorservoLeft = null;
+    public Servo colorservoRight = null;
     //public Servo crServo    = null;
 
     //sensors
     //public GyroSensor gyro  = null;
+    public ColorSensor colorsensorL = null;
+    public ColorSensor colorsensorR = null;
 
     /* local OpMode members. */
     HardwareMap hwMap        = null;
@@ -57,7 +60,6 @@ public class OurRobotHardwareSetup {
     double SpinRight = 0.6;
     double STOP = 0.5;
 
-    public ColorSensor colorsensor = null;
 
     double Red = 60;
     double Blue = 20;
@@ -102,18 +104,22 @@ public class OurRobotHardwareSetup {
          * SERVO SECTION
          ************************************************************/
         // Define Motors to match Robot Configuration File
-        servoHandL = hwMap.servo.get("servoHandL");
-        servoHandR = hwMap.servo.get("servoHandR");
-        servoHandL = hwMap.servo.get("servoHandl");
-        servoHandr = hwMap.servo.get("servoHandr");
+        servoHandTopLeft = hwMap.servo.get("servoHandTopLeft");
+        servoHandTopRight = hwMap.servo.get("servoHandTopRight");
+        servoHandBottomLeft = hwMap.servo.get("servoHandBottomLeft");
+        servoHandBottomRight = hwMap.servo.get("servoHandBottomRight");
+        colorservoLeft = hwMap.servo.get("colorservoLeft");
+        colorservoRight = hwMap.servo.get("colorservoRight");
         //crServo    = hwMap.servo.get("crServo");
 
         //Set servo hand grippers to open position.
-        servoHandL.setPosition(0.75);
-        servoHandR.setPosition(0.27);
+        servoHandTopLeft.setPosition(0.75);
+        servoHandTopRight.setPosition(0.27);
 
-        servoHandl.setPosition(0.75);
-        servoHandr.setPosition(0.27);
+        servoHandBottomLeft.setPosition(0.75);
+        servoHandBottomRight.setPosition(0.27);
+        colorservoLeft.setPosition(.8);
+        colorservoRight.setPosition(.2);
 
         //Continous Rotation Servo
         //crServo.setPosition(STOP);
@@ -123,14 +129,10 @@ public class OurRobotHardwareSetup {
          ************************************************************/
         //Define sensors
         //gyro = hwMap.gyroSensor.get("gyro");
+        colorsensorL = hwMap.colorSensor.get("colorsensorL");
+        colorsensorR = hwMap.colorSensor.get("colorsensorR");
 
-
-
-
-
-
-
-   }
+    }
 
 }
 

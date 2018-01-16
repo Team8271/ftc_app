@@ -135,10 +135,10 @@ public class KnightVuforiaRed extends LinearOpMode {
                 if (vuMark == RelicRecoveryVuMark.RIGHT) {
                     // autonomous code here...
                     //close
-                    robot.servoHandL.setPosition(0.8);
-                    robot.servoHandR.setPosition(0.2);
-                    robot.servoHandl.setPosition(0.8);
-                    robot.servoHandr.setPosition(0.2);
+                    robot.servoHandTopLeft.setPosition(0.6);
+                    robot.servoHandTopRight.setPosition(0.4);
+                    robot.servoHandBottomLeft.setPosition(0.6);
+                    robot.servoHandBottomRight.setPosition(0.4);
 
                     DriveForwardTime(DRIVE_POWER, 2100);
                     StopDrivingTime(500);
@@ -146,20 +146,20 @@ public class KnightVuforiaRed extends LinearOpMode {
                     StopDrivingTime(1000);
                     DriveForwardTime(DRIVE_POWER, 500);
                     //open
-                    robot.servoHandL.setPosition(0.5);
-                    robot.servoHandR.setPosition(0.5);
-                    robot.servoHandl.setPosition(0.5);
-                    robot.servoHandr.setPosition(0.5);
+                    robot.servoHandTopLeft.setPosition(0.8);
+                    robot.servoHandTopRight.setPosition(0.2);
+                    robot.servoHandBottomLeft.setPosition(0.8);
+                    robot.servoHandBottomRight.setPosition(0.2);
                     DriveForwardTime(-0.25,20);
 
                 }
                 else if (vuMark == RelicRecoveryVuMark.CENTER){
                     // autonomous code here..
                     //close
-                    robot.servoHandL.setPosition(0.8);
-                    robot.servoHandR.setPosition(0.2);
-                    robot.servoHandl.setPosition(0.8);
-                    robot.servoHandr.setPosition(0.2);
+                    robot.servoHandTopLeft.setPosition(0.6);
+                    robot.servoHandTopRight.setPosition(0.4);
+                    robot.servoHandBottomLeft.setPosition(0.6);
+                    robot.servoHandBottomRight.setPosition(0.4);
 
                     DriveForwardTime(DRIVE_POWER, 2550);
                     StopDrivingTime(500);
@@ -167,22 +167,22 @@ public class KnightVuforiaRed extends LinearOpMode {
                     StopDrivingTime(500);
                     DriveForwardTime(DRIVE_POWER,500);
                     //open
-                    robot.servoHandL.setPosition(0.5);
-                    robot.servoHandR.setPosition(0.5);
-                    robot.servoHandl.setPosition(0.5);
-                    robot.servoHandr.setPosition(0.5);
-                    DriveForwardTime(-0.25,20);
+                    robot.servoHandTopLeft.setPosition(0.8);
+                    robot.servoHandTopRight.setPosition(0.2);
+                    robot.servoHandBottomLeft.setPosition(0.8);
+                    robot.servoHandBottomRight.setPosition(0.2);
+                    DriveForwardTime(-0.45,20);
 
 
                 }
                 else if (vuMark == RelicRecoveryVuMark.LEFT){
-                    // autonomous code here...
-                    //close
 
-                    robot.servoHandL.setPosition(0.8);
-                    robot.servoHandR.setPosition(0.2);
-                    robot.servoHandl.setPosition(0.8);
-                    robot.servoHandr.setPosition(0.2);
+                    //grab the gliph
+
+                    robot.servoHandTopLeft.setPosition(0.6);
+                    robot.servoHandTopRight.setPosition(0.4);
+                    robot.servoHandBottomLeft.setPosition(0.6);
+                    robot.servoHandBottomRight.setPosition(0.4);
 
                     DriveForwardTime(DRIVE_POWER, 2150);
                     StopDrivingTime(500);
@@ -193,11 +193,11 @@ public class KnightVuforiaRed extends LinearOpMode {
                     TurnRight(0.5,400);
                     DriveForwardTime(DRIVE_POWER,500);
                     //open
-                    robot.servoHandL.setPosition(0.5);
-                    robot.servoHandR.setPosition(0.5);
-                    robot.servoHandl.setPosition(0.5);
-                    robot.servoHandr.setPosition(0.5);
-                    DriveForwardTime(-0.25,20);
+                    robot.servoHandTopLeft.setPosition(0.8);
+                    robot.servoHandTopRight.setPosition(0.2);
+                    robot.servoHandBottomLeft.setPosition(0.8);
+                    robot.servoHandBottomRight.setPosition(0.2);
+                    DriveForwardTime(-0.45,20);
 
 
                 }
