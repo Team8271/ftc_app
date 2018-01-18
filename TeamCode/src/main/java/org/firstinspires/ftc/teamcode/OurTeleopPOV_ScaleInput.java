@@ -51,9 +51,10 @@ public class OurTeleopPOV_ScaleInput extends LinearOpMode {
         double drive = (-gamepad1.left_stick_y);
         double turn = (gamepad1.right_stick_x);
 
-        // Clip joystick values to be withing the range of the allowable motor power levels
-        leftPower = Range.clip(drive + turn, -1.0, 1.0);
-        rightPower = Range.clip(drive - turn, -1.0, 1.0);
+            // Clip joystick values to be withing the range of the allowable motor power levels
+            leftPower = Range.clip(drive + turn, -1.0, 1.0);
+            rightPower = Range.clip(drive - turn, -1.0, 1.0);
+
             //button that halves values in which makes for more accurate movements.
             int div = 0;
             if (gamepad1.right_bumper) {
@@ -84,39 +85,16 @@ public class OurTeleopPOV_ScaleInput extends LinearOpMode {
             }
 
 
-
-
-                    // Arm Control - Uses dual buttons to control motor direction
-        /*      double armUp = gamepad2.right_trigger/2.0;
-              double armDown = -gamepad2.right_trigger/2.0;
-
-              if(gamepad2.right_bumper)
-              {
-                robot.motorArm.setPower(armDown); // if both Bumper + Trigger, then negative power, runs arm down
-              }
-              else
-              {
-                robot.motorArm.setPower(armUp);  // else trigger positive value, runs arm up
-              }
-        */
-            //Arm Control - Uses right joystick to control motor direction
             robot.motorArm.setPower(-gamepad2.right_stick_y / 2);
 
             // Send telemetry message to signify robot running;
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-            //telemetry.addData("Arm", "Up (%.2f), Down (%.2f)", armUp, armDown);
-
-            //telemetry.addData("Claw", "%.2f", gamepad1.a, gamepad1.b);
+            telemetry.addData("Claw", "%.2f", gamepad1.a, gamepad1.b);
             telemetry.update();
 
-            // Pace this loop so jaw action is reasonable speed.
-            //sleep(50); not sure this is needed
 
-      /*
-   * This method scales the joystick input so for low joystick values, the
-   * scaled value is less than linear.  This is to make it easier to drive
-   * the robot more precisely at slower speeds.
-   */
+
+
 
 
     }//While OpMode Active

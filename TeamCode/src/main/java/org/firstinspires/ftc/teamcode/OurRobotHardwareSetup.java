@@ -52,9 +52,11 @@ public class OurRobotHardwareSetup {
 
     //Create and set default servo positions & MOTOR STOP variables.
     //Possible servo values: 0.0 - 1.0  For CRServo 0.5=stop greater or less than will spin in that direction
-    final static double CLOSED = 0.3;
-    final static double OPEN = 0.7;
-    final static double MOTOR_STOP = 0.0; // sets motor power to zero
+    public static final double MID_SERVO    =  0.5 ;
+    final static double CLOSED              = 0.3;
+    final static double OPEN                = 0.7;
+    final static double MOTOR_STOP          = 0.0; // sets motor power to zero
+
     //CR servo variables
     double SpinLeft = 0.1;
     double SpinRight = 0.6;
@@ -115,9 +117,9 @@ public class OurRobotHardwareSetup {
         //Set servo hand grippers to open position.
         servoHandTopLeft.setPosition(0.75);
         servoHandTopRight.setPosition(0.27);
-
         servoHandBottomLeft.setPosition(0.75);
         servoHandBottomRight.setPosition(0.27);
+        //Servo color sensor arms
         colorservoLeft.setPosition(.8);
         colorservoRight.setPosition(.2);
 
