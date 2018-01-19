@@ -20,10 +20,10 @@ public class MrRTeleopPOV_ToggleGrabbers extends LinearOpMode {
     /* Declare Hardware */
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup(); // Use a hardware setup class
 
-     double LEFT_SERVO_CLOSED = 0.0;
-     double LEFT_SERVO_OPEN = 1.0;
-     double RIGHT_SERVO_CLOSED = 1.0;
-     double RIGHT_SERVO_OPEN = 0.0;
+     double LEFT_SERVO_CLOSED = 0.2;  // servo values
+     double LEFT_SERVO_OPEN = 0.8;
+     double RIGHT_SERVO_CLOSED = 0.8;
+     double RIGHT_SERVO_OPEN = 0.2;
 
     @Override
     public void runOpMode() {
@@ -35,6 +35,7 @@ public class MrRTeleopPOV_ToggleGrabbers extends LinearOpMode {
         telemetry.addData("Hello Driver", "Waiting for Start..."); //
         telemetry.update();
 
+        // establish variables to monitor buttons and servo conditions
         boolean xPressed = false;
         boolean yPressed = false;
         boolean topOpen = false;
@@ -53,65 +54,55 @@ public class MrRTeleopPOV_ToggleGrabbers extends LinearOpMode {
 
             if (gamepad2.a) {
 // Set all servos to open position
-//                robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
-//                robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
-//                robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
-//                robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
+                robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
 
-                robot.servoHandTopRight.setPosition(0.2);
-                robot.servoHandTopLeft.setPosition(0.8);
-                robot.servoHandBottomRight.setPosition(0.2);
-                robot.servoHandBottomLeft.setPosition(0.8);
-
-                topOpen = true; // sets current position of servo
+                topOpen = true; // updates current position of servo
                 bottomOpen = true;
             } else if (gamepad2.b) {
 // Set all servos to closed position
-//                robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
-//                robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
-//                robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
-//                robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
+                robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
+                robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
 
-                robot.servoHandTopRight.setPosition(0.9);
-                robot.servoHandTopLeft.setPosition(0.1);
-                robot.servoHandBottomRight.setPosition(0.9);
-                robot.servoHandBottomLeft.setPosition(0.1);
-
-                topOpen = false;
+                topOpen = false; // updates current position of servo
                 bottomOpen = false;
-//            } else {
-//                if (gamepad2.x && !xPressed) { // ifx down and wasn't previously
-//// Toggle top servos only
-//                    if (topOpen) {
-//                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
-//                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
-//
-//                        topOpen = false;
-//                    } else {
-//                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
-//                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
-//
-//                        topOpen = true;
-//                    }
-//                }
-//
-//                if (gamepad2.y && !yPressed) {
-//// Toggle bottom servos only
-//                    if (topOpen) {
-//                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
-//                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
-//
-//                        bottomOpen = false;
-//                    } else {
-//                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
-//                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
-//
-//                        bottomOpen = true;
-//                    }
-//                }
+            } else {
+                if (gamepad2.x && !xPressed) { // if x is now down and wasn't previously
+// Toggle top servos only
+                    if (topOpen) { // if was topOpen, then close
+                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
+
+                        topOpen = false; // toggle topOpen to false
+                    } else { // else if not topOpen, then open
+                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+
+                        topOpen = true;// toggle topOpen to true
+                    }
+                }
+
+                if (gamepad2.y && !yPressed) {
+// Toggle bottom servos only
+                    if (bottomOpen) {
+                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
+
+                        bottomOpen = false;
+                    } else {
+                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
+
+                        bottomOpen = true;
+                    }
+                }
             }
 
-            xPressed = gamepad2.x; // resets so next time thru it know current state of button
+            xPressed = gamepad2.x; // resets so next time thru it knows current state of buttons
             yPressed = gamepad2.y;
 
 //display the button pressed
