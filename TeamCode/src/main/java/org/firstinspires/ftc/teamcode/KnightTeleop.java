@@ -22,9 +22,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *
  */
 
-@TeleOp(name="Scaled Teleop POV Toggle", group="Competition")
+@TeleOp(name="KnightTeleop", group="Competition")
 //@Disabled
-public class OurTeleopPOV_ScaleInputToggleGrabbers extends LinearOpMode {
+public class KnightTeleop extends LinearOpMode {
 
   /* Declare Hardware */
   OurRobotHardwareSetup robot = new OurRobotHardwareSetup();   // Use a hardware setup class
@@ -39,14 +39,15 @@ public class OurTeleopPOV_ScaleInputToggleGrabbers extends LinearOpMode {
     telemetry.addData("Hello Driver", "Waiting for Start...");    //
     telemetry.update();
 
-        boolean last_x = false;
-        boolean last_y = false;
-        boolean direction_state_y = false;
-        boolean direction_state_x = false;
-       // double trPosOpen = 0.2;
-        //ouble trPosClose = 0.85;
-        double PosOpen = 0.8;
-        double PosClose = 0.2;
+        double LEFT_SERVO_CLOSED = 0.1;
+        double LEFT_SERVO_OPEN  = 0.9;
+        double RIGHT_SERVO_CLOSED = 0.7;
+        double RIGHT_SERVO_OPEN = 0.3;
+
+        boolean xpressed = false;
+        boolean ypressed = false;
+        boolean topOpen = false;
+        boolean bottomOpen = false;
 
 
 
@@ -86,43 +87,21 @@ public class OurTeleopPOV_ScaleInputToggleGrabbers extends LinearOpMode {
             //Servo commands
             if (gamepad2.a) //button 'a' will open top servos
             {
-                robot.servoHandTopRight.setPosition(0.2);
-                robot.servoHandTopLeft.setPosition(0.8);
-                robot.servoHandBottomRight.setPosition(0.2);
-                robot.servoHandBottomLeft.setPosition(0.8);
+                robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
+                robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
 
             } else if (gamepad2.b) //button 'b' will close top servos
             {
-                robot.servoHandTopRight.setPosition(0.9);
-                robot.servoHandTopLeft.setPosition(0.1);
-                robot.servoHandBottomRight.setPosition(0.9);
-                robot.servoHandBottomLeft.setPosition(0.1);
+                robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
+                robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
+                robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
 
             }
 
 
-            boolean y_pressed = gamepad2.y;
-
-            if(y_pressed && !last_y) {
-                direction_state_y = !direction_state_y;
-                double newY_Pos = PosClose;
-                if (direction_state_y == false) {
-                    newY_Pos = PosClose;
-                }
-                else {
-                    newY_Pos = PosOpen;
-
-                }
-
-                robot.servoHandTopLeft.setPosition(newY_Pos);
-                robot.servoHandTopRight.setPosition(newY_Pos);
-            }
-
-            last_y = y_pressed;
-
-
-
-            idle();
 
 
 
@@ -132,27 +111,16 @@ public class OurTeleopPOV_ScaleInputToggleGrabbers extends LinearOpMode {
 
 
 
-                    // Arm Control - Uses dual buttons to control motor direction
-        /*      double armUp = gamepad2.right_trigger/2.0;
-              double armDown = -gamepad2.right_trigger/2.0;
 
-              if(gamepad2.right_bumper)
-              {
-                robot.motorArm.setPower(armDown); // if both Bumper + Trigger, then negative power, runs arm down
-              }
-              else
-              {
-                robot.motorArm.setPower(armUp);  // else trigger positive value, runs arm up
-              }
-        */
+
+
             //Arm Control - Uses right joystick to control motor direction
-            robot.motorArm.setPower(-gamepad2.right_stick_y / 2);
+            robot.motorArm.setPower(-gamepad2.right_stick_y / 4);
 
-            // Send telemetry message to signify robot running;
+
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-            //telemetry.addData("Arm", "Up (%.2f), Down (%.2f)", armUp, armDown);
 
-            //telemetry.addData("Claw", "%.2f", gamepad1.a, gamepad1.b);
+
             telemetry.update();
 
             // Pace this loop so jaw action is reasonable speed.
