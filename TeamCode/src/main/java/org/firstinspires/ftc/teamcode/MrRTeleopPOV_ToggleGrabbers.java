@@ -58,8 +58,8 @@ public class MrRTeleopPOV_ToggleGrabbers extends LinearOpMode {
                 robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
                 robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
 
-                topOpen = true;
-                bottomOpen = false;
+                topOpen = true; // sets current position of servo
+                bottomOpen = true;
             } else if (gamepad2.b) {
 // Set all servos to closed position
                 robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
@@ -70,7 +70,7 @@ public class MrRTeleopPOV_ToggleGrabbers extends LinearOpMode {
                 topOpen = false;
                 bottomOpen = false;
             } else {
-                if (gamepad2.x && !xPressed) {
+                if (gamepad2.x && !xPressed) { // ifx down and wasn't previously
 // Toggle top servos only
                     if (topOpen) {
                         robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
@@ -89,5 +89,29 @@ public class MrRTeleopPOV_ToggleGrabbers extends LinearOpMode {
 // Toggle bottom servos only
                     if (topOpen) {
                         robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
+
+                        bottomOpen = false;
+                    } else {
+                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
+
+                        bottomOpen = true;
                     }
+                }
+            }
+
+            xPressed = gamepad2.x; // resets so next time thru it know current state of button
+            yPressed = gamepad2.y;
+
+//display the button pressed
+            telemetry.addData("Claw", "A " + String.valueOf(gamepad2.a));
+            telemetry.addData("Single Claw", "x " + String.valueOf(gamepad2.x ));
+//telemetry.addData("newPos: ", newY_Pos);
+            telemetry.update();
+
+            idle();
+
+        }//While OpMode Active
+    }//run opMode
 }//Linear OpMode

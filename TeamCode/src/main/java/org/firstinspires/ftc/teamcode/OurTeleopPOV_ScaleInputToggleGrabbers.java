@@ -115,7 +115,7 @@ public class OurTeleopPOV_ScaleInputToggleGrabbers extends LinearOpMode {
                 }
 
                 robot.servoHandTopLeft.setPosition(newY_Pos);
-                robot.servoHandTopRight.setPosition(newY_Pos - 0.5);
+                robot.servoHandTopRight.setPosition(newY_Pos);
             }
 
             last_y = y_pressed;
