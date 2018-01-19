@@ -1,19 +1,17 @@
 
 package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 /**
- * All device access is managed through the OurRobotHardwareSetup class.
- * The code is structured as a LinearOpMode
- *
- * This particular OpMode executes a POV Game style Teleop for the robot
- * In this mode the left stick moves the robot FWD and back, the Right stick turns left and right.
- * It raises and lowers the arm using the Gampad trigger and bumper
- * It also opens and closes the claws slowly using the a/b buttons
- *
+ * Testing 4 servo grabber
+ * with added toggle buttons to run top/bottom servos separately
  */
 
 @TeleOp(name="MrR TeleopPOV Toggle", group="Concept")
@@ -23,8 +21,9 @@ public class MrRTeleopPOV_ToggleGrabbers extends LinearOpMode {
   /* Declare Hardware */
   OurRobotHardwareSetup robot = new OurRobotHardwareSetup();   // Use a hardware setup class
 
-    double          clawOffset  = 0.5 ;                  // Servo mid position
-    final double    CLAW_SPEED  = 0.02 ;                 // sets rate to move servo
+    double          MID_SERVO   = 0.5 ;     // Servo mid position
+    double          clawOffset  = 0.5 ;
+    final double    CLAW_SPEED  = 0.02 ;    // sets rate to move servo
 
   @Override
   public void runOpMode() {
@@ -53,34 +52,10 @@ public class MrRTeleopPOV_ToggleGrabbers extends LinearOpMode {
     // run until the end of the match (driver presses STOP)
     while (opModeIsActive()) {
 
-        //Run Drive Motors
-        // Setup a variable for each drive wheel to save power level for telemetry
-        double leftPower;
-        double rightPower;
 
-        // POV Mode uses left stick to go forward, and right stick to turn.
-        // - This uses basic math to combine motions and is easier to drive straight.
+        // Main servo controls to open and close all 4 servos together
+        // using pushbot configuration for mirrored servos
 
-        //drive and turn
-        double drive = (-gamepad1.left_stick_y);
-        double turn = (gamepad1.right_stick_x);
-
-        // Clip joystick values to be withing the range of the allowable motor power levels
-        leftPower = Range.clip(drive + turn, -1.0, 1.0);
-        rightPower = Range.clip(drive - turn, -1.0, 1.0);
-            //button that halves values in which makes for more accurate movements.
-            int div = 0;
-            if (gamepad1.right_bumper) {
-                div = 2;
-            } else {
-                div = 1;
-            }
-
-            // Send calculated power to wheels
-            robot.motorLeft.setPower(leftPower / div);
-            robot.motorRight.setPower(rightPower / div);
-
-        // Use gamepad left & right Bumpers to open and close the claw
         if (gamepad2.a)
             clawOffset += CLAW_SPEED;
         else if (gamepad2.b)
@@ -88,10 +63,12 @@ public class MrRTeleopPOV_ToggleGrabbers extends LinearOpMode {
 
         // Move both servos to new position.  Assume servos are mirror image of each other.
         clawOffset = Range.clip(clawOffset, -0.5, 0.5);
-        robot.servoHandTopLeft.setPosition(robot.MID_SERVO + clawOffset);
-        robot.servoHandTopRight.setPosition(robot.MID_SERVO - clawOffset);
+        robot.servoHandTopLeft.setPosition(MID_SERVO + clawOffset);
+        robot.servoHandBottomLeft.setPosition(MID_SERVO + clawOffset);
+        robot.servoHandTopRight.setPosition(MID_SERVO - clawOffset);
+        robot.servoHandBottomRight.setPosition(MID_SERVO - clawOffset);
 
-
+        // Upper/Lower Servo Control Toggle
             boolean y_pressed = gamepad2.y;
 
             if(y_pressed && !last_y) {
@@ -101,60 +78,21 @@ public class MrRTeleopPOV_ToggleGrabbers extends LinearOpMode {
                     newY_Pos = PosClose;
                 }
                 else {
-                    newY_Pos = PosOpen;
-
+                    newY_Pos = -PosOpen;
                 }
-
-                robot.servoHandTopLeft.setPosition(newY_Pos);
-                robot.servoHandTopRight.setPosition(newY_Pos - 0.5);
+                robot.servoHandTopLeft.setPosition(MID_SERVO + newY_Pos);
+                robot.servoHandBottomRight.setPosition(MID_SERVO + newY_Pos);
             }
 
             last_y = y_pressed;
 
+            //display the button pressed
+        telemetry.addData("Claw", "A ",  gamepad2.a );
+        telemetry.addData("Single Claw", "x ",   gamepad2.x );
+        //telemetry.addData("newPos: ", newY_Pos);
+        telemetry.update();
 
-
-            idle();
-
-
-
-
-
-
-
-
-
-                    // Arm Control - Uses dual buttons to control motor direction
-        /*      double armUp = gamepad2.right_trigger/2.0;
-              double armDown = -gamepad2.right_trigger/2.0;
-
-              if(gamepad2.right_bumper)
-              {
-                robot.motorArm.setPower(armDown); // if both Bumper + Trigger, then negative power, runs arm down
-              }
-              else
-              {
-                robot.motorArm.setPower(armUp);  // else trigger positive value, runs arm up
-              }
-        */
-            //Arm Control - Uses right joystick to control motor direction
-            robot.motorArm.setPower(-gamepad2.right_stick_y / 2);
-
-            // Send telemetry message to signify robot running;
-            telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-            //telemetry.addData("Arm", "Up (%.2f), Down (%.2f)", armUp, armDown);
-
-            //telemetry.addData("Claw", "%.2f", gamepad1.a, gamepad1.b);
-            telemetry.update();
-
-            // Pace this loop so jaw action is reasonable speed.
-            //sleep(50); not sure this is needed
-
-      /*
-   * This method scales the joystick input so for low joystick values, the
-   * scaled value is less than linear.  This is to make it easier to drive
-   * the robot more precisely at slower speeds.
-   */
-
+        idle();
 
     }//While OpMode Active
   }//run opMode
