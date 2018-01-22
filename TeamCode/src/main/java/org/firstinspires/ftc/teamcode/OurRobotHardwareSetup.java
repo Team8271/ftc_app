@@ -120,8 +120,8 @@ public class OurRobotHardwareSetup {
         servoHandBottomLeft.setPosition(0.75);
         servoHandBottomRight.setPosition(0.27);
         //Servo color sensor arms
-        colorservoLeft.setPosition(.8);
-        colorservoRight.setPosition(.2);
+        colorservoLeft.setPosition(.3);
+        colorservoRight.setPosition(.7);
 
         //Continous Rotation Servo
         //crServo.setPosition(STOP);

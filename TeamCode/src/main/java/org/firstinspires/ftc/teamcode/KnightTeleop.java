@@ -92,6 +92,9 @@ public class KnightTeleop extends LinearOpMode {
                 robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
                 robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
 
+                topOpen = true;
+                bottomOpen = true; //update the current position of the servos
+
             } else if (gamepad2.b) //button 'b' will close top servos
             {
                 robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
@@ -99,7 +102,54 @@ public class KnightTeleop extends LinearOpMode {
                 robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
                 robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
 
+                topOpen = false;
+                bottomOpen = false; // update current position of the servos.
+
             }
+            else {
+                if (gamepad2.x && !xpressed) {
+                    if (topOpen) {
+                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
+
+                        topOpen = false;
+                    } else {
+                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+
+                        topOpen = true;
+                    }
+
+                }
+
+                if (gamepad2.y && !ypressed) {
+                    if (bottomOpen) {
+                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
+
+                        bottomOpen = false;
+                    }
+                    else {
+                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
+
+                        bottomOpen = true;
+                    }
+                }
+            }
+
+            xpressed = gamepad2.x;
+            ypressed = gamepad2.y;
+
+
+            telemetry.addData("Claw",  "A" + String.valueOf(gamepad2.a));
+            telemetry.addData("Single Claw", "x" + String.valueOf(gamepad2.x));
+            // add telemetry for b and y
+
+            telemetry.update();
+        idle();
+
+
 
 
 
@@ -115,7 +165,7 @@ public class KnightTeleop extends LinearOpMode {
 
 
             //Arm Control - Uses right joystick to control motor direction
-            robot.motorArm.setPower(-gamepad2.right_stick_y / 4);
+            robot.motorArm.setPower(-gamepad2.right_stick_y );
 
 
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
