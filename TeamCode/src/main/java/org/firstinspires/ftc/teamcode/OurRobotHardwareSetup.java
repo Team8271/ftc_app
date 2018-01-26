@@ -58,8 +58,7 @@ public class OurRobotHardwareSetup {
     final static double MOTOR_STOP          = 0.0; // sets motor power to zero
 
     //CR servo variables
-    double SpinLeft = 0.1;
-    double SpinRight = 0.6;
+
     double STOP = 0.5;
 
 
@@ -120,8 +119,8 @@ public class OurRobotHardwareSetup {
         servoHandBottomLeft.setPosition(0.75);
         servoHandBottomRight.setPosition(0.27);
         //Servo color sensor arms
-        colorservoLeft.setPosition(.3);
-        colorservoRight.setPosition(.7);
+        colorservoLeft.setPosition(.7);
+        colorservoRight.setPosition(.3);
 
         //Continous Rotation Servo
         //crServo.setPosition(STOP);

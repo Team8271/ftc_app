@@ -8,9 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-
-
-
 /**
  * All device access is managed through the OurRobotHardwareSetup class.
  * The code is structured as a LinearOpMode
@@ -26,52 +23,61 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 //@Disabled
 public class KnightTeleop extends LinearOpMode {
 
-  /* Declare Hardware */
-  OurRobotHardwareSetup robot = new OurRobotHardwareSetup();   // Use a hardware setup class
+    /* Declare Hardware */
+    OurRobotHardwareSetup robot = new OurRobotHardwareSetup();   // Use a hardware setup class
 
-  @Override
-  public void runOpMode() {
+    private ElapsedTime runtime = new ElapsedTime();
+
+    @Override
+    public void runOpMode() {
 
         /* Initialize the hardware from OurRobotHardwareSetup*/
-    robot.init(hardwareMap);
+        robot.init(hardwareMap);
 
-    // Send telemetry message to signify robot waiting;
-    telemetry.addData("Hello Driver", "Waiting for Start...");    //
-    telemetry.update();
 
-        double LEFT_SERVO_CLOSED = 0.1;
-        double LEFT_SERVO_OPEN  = 0.9;
-        double RIGHT_SERVO_CLOSED = 0.7;
-        double RIGHT_SERVO_OPEN = 0.3;
+        double LEFT_SERVO_CLOSED = 0.8;// The bigger the number the tighter the grasp of the servo
+        double LEFT_SERVO_OPEN = 0.2;
+
+        double RIGHT_SERVO_CLOSED = 0.2;// The smaller the number, the tighter the grasp of the servo
+        double RIGHT_SERVO_OPEN = 0.8;
 
         boolean xpressed = false;
         boolean ypressed = false;
         boolean topOpen = false;
         boolean bottomOpen = false;
 
+        double armMinPos = 0.0;      // encoder position for arm at bottom
+        double armMaxPos = -5380.0;   // encoder position for arm at top
+        int armHoldPosition;             // reading of arm position when buttons released to hold
+        double slopeVal = 3500.0;   // increase or decrease to perfect
 
+        armHoldPosition = robot.motorArm.getCurrentPosition();
 
-      // Wait for the game to start (driver presses PLAY)
-      waitForStart();
+        // Send telemetry message to signify robot waiting;
+        telemetry.addData("Hello Driver", "Waiting for Start...");    //
+        telemetry.update();
 
-    // run until the end of the match (driver presses STOP)
-    while (opModeIsActive()) {
+        // Wait for the game to start (driver presses PLAY)
+        waitForStart();
 
-        //Run Drive Motors
-        // Setup a variable for each drive wheel to save power level for telemetry
-        double leftPower;
-        double rightPower;
+        // run until the end of the match (driver presses STOP)
+        while (opModeIsActive()) {
 
-        // POV Mode uses left stick to go forward, and right stick to turn.
-        // - This uses basic math to combine motions and is easier to drive straight.
+            //Run Drive Motors
+            // Setup a variable for each drive wheel to save power level for telemetry
+            double leftPower;
+            double rightPower;
 
-        //drive and turn
-        double drive = (-gamepad1.left_stick_y);
-        double turn = (gamepad1.right_stick_x);
+            // POV Mode uses left stick to go forward, and right stick to turn.
+            // - This uses basic math to combine motions and is easier to drive straight.
 
-        // Clip joystick values to be withing the range of the allowable motor power levels
-        leftPower = Range.clip(drive + turn, -1.0, 1.0);
-        rightPower = Range.clip(drive - turn, -1.0, 1.0);
+            //drive and turn
+            double drive = (-gamepad1.left_stick_y);
+            double turn = (gamepad1.right_stick_x);
+
+            // Clip joystick values to be withing the range of the allowable motor power levels
+            leftPower = Range.clip(drive + turn, -1.0, 1.0);
+            rightPower = Range.clip(drive - turn, -1.0, 1.0);
             //button that halves values in which makes for more accurate movements.
             int div = 0;
             if (gamepad1.right_bumper) {
@@ -84,8 +90,48 @@ public class KnightTeleop extends LinearOpMode {
             robot.motorLeft.setPower(leftPower / div);
             robot.motorRight.setPower(rightPower / div);
 
-            //Servo commands
-            if (gamepad2.a) //button 'a' will open top servos
+            runtime.reset();
+
+
+            // Display running time and Encoder value
+            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("ArmPosition: ", +robot.motorArm.getCurrentPosition());
+            telemetry.addData("Claw", "A" + String.valueOf(gamepad2.a));
+            telemetry.addData("Single Claw", "x" + String.valueOf(gamepad2.x));
+            telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
+
+            telemetry.update();
+
+            // Arm Control - Uses left_stick_y to control motor direction.
+            //          Note:   joystick values are reversed to common thought
+            //                  Neg value when stick up, Pos when stick down (to reverse this you'd need to make all gamepad values negative)
+
+            // Uses Encoder values to set upper and lower limits to protect motors from over-driving lift
+            // and to hold arm position on decent to account for gravitational inertia
+
+            if (gamepad2.left_trigger > 0.0 ) // encoder greater that lower limit
+            {
+                robot.motorArm.setPower(-gamepad2.left_trigger); // let stick drive UP (note this is positive value on joystick)
+                armHoldPosition = robot.motorArm.getCurrentPosition(); // while the lift is moving, continuously reset the arm holding position
+            } else if (gamepad2.right_trigger > 0.0 ) //encoder less than Max limit && robot.motorArm.getCurrentPosition() > armMaxPos
+            {
+                robot.motorArm.setPower(gamepad2.right_trigger); //let stick drive DOWN (note this is negative value on joystick)
+                armHoldPosition = robot.motorArm.getCurrentPosition(); // while the lift is moving, continuously reset the arm holding position
+            } else //triggers are released - try to maintain the current position
+            {
+                robot.motorArm.setPower((double) ( armHoldPosition - robot.motorArm.getCurrentPosition()) / slopeVal);   // Note that if the lift is lower than desired position,
+                // the subtraction will be positive and the motor will
+                // attempt to raise the lift. If it is too high it will
+                // be negative and thus try to lower the lift
+                // adjust slopeVal to acheived perfect hold power
+            }
+
+
+            // Servo Controls
+            // Uses buttons a,b,x,y
+            // to control four 'Hand' Servos
+            // together or independently
+            if (gamepad2.a) //button 'a' will open servos
             {
                 robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
                 robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
@@ -95,7 +141,7 @@ public class KnightTeleop extends LinearOpMode {
                 topOpen = true;
                 bottomOpen = true; //update the current position of the servos
 
-            } else if (gamepad2.b) //button 'b' will close top servos
+            } else if (gamepad2.b) //button 'b' will close servos
             {
                 robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
                 robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
@@ -105,9 +151,8 @@ public class KnightTeleop extends LinearOpMode {
                 topOpen = false;
                 bottomOpen = false; // update current position of the servos.
 
-            }
-            else {
-                if (gamepad2.x && !xpressed) {
+            } else {
+                if (gamepad2.y && !ypressed) {
                     if (topOpen) {
                         robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
                         robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
@@ -122,14 +167,13 @@ public class KnightTeleop extends LinearOpMode {
 
                 }
 
-                if (gamepad2.y && !ypressed) {
+                if (gamepad2.x && !xpressed) {
                     if (bottomOpen) {
                         robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
                         robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
 
                         bottomOpen = false;
-                    }
-                    else {
+                    } else {
                         robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
                         robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
 
@@ -142,47 +186,15 @@ public class KnightTeleop extends LinearOpMode {
             ypressed = gamepad2.y;
 
 
-            telemetry.addData("Claw",  "A" + String.valueOf(gamepad2.a));
-            telemetry.addData("Single Claw", "x" + String.valueOf(gamepad2.x));
-            // add telemetry for b and y
 
-            telemetry.update();
-        idle();
+            idle();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //Arm Control - Uses right joystick to control motor direction
-            robot.motorArm.setPower(-gamepad2.right_stick_y );
-
-
-            telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-
-
-            telemetry.update();
 
             // Pace this loop so jaw action is reasonable speed.
             //sleep(50); not sure this is needed
 
-      /*
-   * This method scales the joystick input so for low joystick values, the
-   * scaled value is less than linear.  This is to make it easier to drive
-   * the robot more precisely at slower speeds.
-   */
 
-
-    }//While OpMode Active
-  }//run opMode
+        }//While OpMode Active
+    }//run opMode
 }//Linear OpMode
