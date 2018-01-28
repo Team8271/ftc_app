@@ -59,6 +59,7 @@ public class KnightTeleop extends LinearOpMode {
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
+        runtime.reset();
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -90,14 +91,14 @@ public class KnightTeleop extends LinearOpMode {
             robot.motorLeft.setPower(leftPower / div);
             robot.motorRight.setPower(rightPower / div);
 
-            runtime.reset();
-
 
             // Display running time and Encoder value
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("ArmPosition: ", +robot.motorArm.getCurrentPosition());
-            telemetry.addData("Claw", "A" + String.valueOf(gamepad2.a));
-            telemetry.addData("Single Claw", "x" + String.valueOf(gamepad2.x));
+            telemetry.addData("Claw", "A-Open" + String.valueOf(gamepad2.a));
+            telemetry.addData("Claw", "B-Close" + String.valueOf(gamepad2.b));
+            telemetry.addData("Single Claw", "Y-Top" + String.valueOf(gamepad2.y));
+            telemetry.addData("Single Claw", "X-Bottom" + String.valueOf(gamepad2.x));
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
 
             telemetry.update();
@@ -115,7 +116,7 @@ public class KnightTeleop extends LinearOpMode {
                 armHoldPosition = robot.motorArm.getCurrentPosition(); // while the lift is moving, continuously reset the arm holding position
             } else if (gamepad2.right_trigger > 0.0 ) //encoder less than Max limit && robot.motorArm.getCurrentPosition() > armMaxPos
             {
-                robot.motorArm.setPower(gamepad2.right_trigger); //let stick drive DOWN (note this is negative value on joystick)
+                robot.motorArm.setPower(gamepad2.right_trigger/6); //let stick drive DOWN (note this is negative value on joystick)
                 armHoldPosition = robot.motorArm.getCurrentPosition(); // while the lift is moving, continuously reset the arm holding position
             } else //triggers are released - try to maintain the current position
             {

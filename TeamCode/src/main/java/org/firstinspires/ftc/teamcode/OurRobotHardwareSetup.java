@@ -2,6 +2,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -86,9 +87,11 @@ public class OurRobotHardwareSetup {
         //colorsensor = hwMap.colorSensor.get("color");
 
         // Set the drive motor directions:
-        motorLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        motorRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        motorArm.setDirection(DcMotor.Direction.FORWARD); // Can change based on motor configuration
+        motorLeft.setDirection(DcMotor.Direction.FORWARD);  // Set to REVERSE if using AndyMark motors
+        motorRight.setDirection(DcMotor.Direction.REVERSE); // Set to FORWARD if using AndyMark motors
+        motorArm.setDirection(DcMotor.Direction.REVERSE);   // Can change based on motor configuration
+                                                            // armMotor reversed to give pos encoder values
+                                                            // required compensating joystick values
 
         //Keep the motors from moving during initialize.
         motorLeft.setPower(MOTOR_STOP);
@@ -97,7 +100,7 @@ public class OurRobotHardwareSetup {
 
         // Set motors to run USING or WITHOUT encoders
         // Depending upon your configuration and use
-       // motorArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
        // motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
        // motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
