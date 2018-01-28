@@ -183,8 +183,8 @@ public class MrRTeleopPOV_ToggleGrabbers extends LinearOpMode {
 
             // Display running time and Encoder value
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("ArmPosition: ", +robot.motorArm.getCurrentPosition());
-            telemetry.addData("ArmPower: ", +robot.motorArm.getPower());
+            telemetry.addData("ArmPosition: ", + robot.motorArm.getCurrentPosition());
+            telemetry.addData("ArmPower: ","(%.2f)", + robot.motorArm.getPower());
             telemetry.addData("Claw", "A-Open" + String.valueOf(gamepad2.a));
             telemetry.addData("Claw", "B-Close" + String.valueOf(gamepad2.b));
             telemetry.addData("Single Claw", "Y-Top" + String.valueOf(gamepad2.y));
