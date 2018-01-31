@@ -225,8 +225,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
         double DRIVE_POWER = .5;
 
         public void DriveForward(double power) {
-            robot.motorLeft.setPower(power);
-            robot.motorRight.setPower(power);
+            robot.motorLeft.setPower(-power);
+            robot.motorRight.setPower(-power);
         }
 
         public void DriveForwardTime(double power, long time) throws InterruptedException {
@@ -243,8 +243,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
         }
 
         public void TurnLeft(double power, long time) throws InterruptedException {
-            robot.motorLeft.setPower(-power);
-            robot.motorRight.setPower(power);
+            robot.motorLeft.setPower(power);
+            robot.motorRight.setPower(-power);
             Thread.sleep(time);
         }
 

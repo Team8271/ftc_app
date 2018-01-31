@@ -56,7 +56,7 @@ import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
  * is explained in {@link ConceptVuforiaNavigation}.
  */
 
-@Autonomous(name="KnightColorVuforia", group ="KnightAutonomous")
+@Autonomous(name="KnightColorVuforiaRed", group ="KnightAutonomous")
 //@Disabled
 public class KnightColorVuforiaRed extends LinearOpMode {
 

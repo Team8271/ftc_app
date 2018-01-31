@@ -26,9 +26,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * is explained in {@link ConceptVuforiaNavigation}.
  */
 
-@Autonomous(name="VuforiaColorBlue", group ="Concept")
+@Autonomous(name="KnightVuforiaColorBlue", group ="Concept")
 //@Disabled
-public class ColorReaderTestBlue extends LinearOpMode {
+public class VuforiaColorBlue extends LinearOpMode {
 
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup(); //get hardware members from HardwareSetUp class
 

@@ -73,8 +73,8 @@ public class KnightTeleop extends LinearOpMode {
             // - This uses basic math to combine motions and is easier to drive straight.
 
             //drive and turn
-            double drive = (-gamepad1.left_stick_y);
-            double turn = (gamepad1.right_stick_x);
+            double drive = (gamepad1.left_stick_y);
+            double turn = (-gamepad1.right_stick_x);
 
             // Clip joystick values to be withing the range of the allowable motor power levels
             leftPower = Range.clip(drive + turn, -1.0, 1.0);
@@ -112,11 +112,11 @@ public class KnightTeleop extends LinearOpMode {
 
             if (gamepad2.left_trigger > 0.0 ) // encoder greater that lower limit
             {
-                robot.motorArm.setPower(-gamepad2.left_trigger); // let stick drive UP (note this is positive value on joystick)
+                robot.motorArm.setPower(gamepad2.left_trigger); // let stick drive UP (note this is positive value on joystick)
                 armHoldPosition = robot.motorArm.getCurrentPosition(); // while the lift is moving, continuously reset the arm holding position
-            } else if (gamepad2.right_trigger > 0.0 ) //encoder less than Max limit && robot.motorArm.getCurrentPosition() > armMaxPos
+            } else if (gamepad2.left_trigger > 0.0 ) //encoder less than Max limit && robot.motorArm.getCurrentPosition() > armMaxPos
             {
-                robot.motorArm.setPower(gamepad2.right_trigger/6); //let stick drive DOWN (note this is negative value on joystick)
+                robot.motorArm.setPower(-gamepad2.right_trigger/6); //let stick drive DOWN (note this is negative value on joystick)
                 armHoldPosition = robot.motorArm.getCurrentPosition(); // while the lift is moving, continuously reset the arm holding position
             } else //triggers are released - try to maintain the current position
             {
