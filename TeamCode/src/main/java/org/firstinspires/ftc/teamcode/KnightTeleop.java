@@ -36,9 +36,9 @@ public class KnightTeleop extends LinearOpMode {
 
 
         double LEFT_SERVO_CLOSED = 0.8;// The bigger the number the tighter the grasp of the servo
-        double LEFT_SERVO_OPEN = 0.2;
+        double LEFT_SERVO_OPEN = 0.1;
 
-        double RIGHT_SERVO_CLOSED = 0.2;// The smaller the number, the tighter the grasp of the servo
+        double RIGHT_SERVO_CLOSED = 0.1;// The smaller the number, the tighter the grasp of the servo
         double RIGHT_SERVO_OPEN = 0.8;
 
         boolean xpressed = false;
@@ -114,9 +114,9 @@ public class KnightTeleop extends LinearOpMode {
             {
                 robot.motorArm.setPower(gamepad2.left_trigger); // let stick drive UP (note this is positive value on joystick)
                 armHoldPosition = robot.motorArm.getCurrentPosition(); // while the lift is moving, continuously reset the arm holding position
-            } else if (gamepad2.left_trigger > 0.0 ) //encoder less than Max limit && robot.motorArm.getCurrentPosition() > armMaxPos
+            } else if (gamepad2.right_trigger > 0.0 ) //encoder less than Max limit && robot.motorArm.getCurrentPosition() > armMaxPos
             {
-                robot.motorArm.setPower(-gamepad2.right_trigger/6); //let stick drive DOWN (note this is negative value on joystick)
+                robot.motorArm.setPower(-gamepad2.right_trigger/2); //let stick drive DOWN (note this is negative value on joystick)
                 armHoldPosition = robot.motorArm.getCurrentPosition(); // while the lift is moving, continuously reset the arm holding position
             } else //triggers are released - try to maintain the current position
             {

@@ -42,6 +42,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaNavigation;
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 
 /**
@@ -57,7 +58,7 @@ import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
  */
 
 @Autonomous(name="KnightColorVuforiaRed", group ="KnightAutonomous")
-//@Disabled
+@Disabled
 public class KnightColorVuforiaRed extends LinearOpMode {
 
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup(); //get hardware members from HardwareSetUp class

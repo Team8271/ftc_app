@@ -33,7 +33,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  */
 
 @Autonomous(name="KnightColor", group ="Concept")
-//@Disabled
+@Disabled
 public class ColorKnight extends LinearOpMode {
 
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup();

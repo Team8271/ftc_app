@@ -28,6 +28,7 @@
  */
 //package org.firstinspires.ftc.teamcode;
 package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -57,7 +58,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 
     @Autonomous(name = "ConceptDelayKnightVuforiaBlue", group = "Concept")
-//@Disabled
+@Disabled
     public class ConceptDelayKnightVuforiaBlue extends LinearOpMode {
 
     private  ElapsedTime timer = new ElapsedTime(); //create timer to monitor elapsed time

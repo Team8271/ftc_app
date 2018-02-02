@@ -49,7 +49,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="Knight AutoByTime", group="Competetion")  // @TeleOp(...) is the other common choice
-//@Disabled
+@Disabled
 public class KnightAutoDriveByTime extends LinearOpMode {
 
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup();

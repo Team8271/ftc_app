@@ -31,6 +31,7 @@ TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -45,7 +46,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  */
 
 @Autonomous(name="Knight AutoByTimeBlue", group="KnightAutonomous")  // @TeleOp(...) is the other common choice
-//@Disabled
+@Disabled
 public class KnightAutoDriveByTimeBlue extends LinearOpMode {
 
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup();

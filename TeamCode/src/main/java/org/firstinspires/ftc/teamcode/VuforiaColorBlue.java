@@ -108,7 +108,7 @@ public class VuforiaColorBlue extends LinearOpMode {
         robot.colorservoRight.setPosition(.5);
         sleep(500);
         //Positions Right sensor to be sensing the jewel
-        robot.colorservoRight.setPosition(.3);//Down
+        robot.colorservoLeft.setPosition(.3);//Down
         sleep(3000);
 
         // Set threshold values for red/blue color sensor readings
@@ -132,7 +132,6 @@ public class VuforiaColorBlue extends LinearOpMode {
 //            SpinRight(.25, 300);
 //            StopDrivingTime(500);
         }
-        // else if (robot.colorsensorR.blue() > robot.colorsensorR.red() && robot.colorsensorR.blue() >= BLUETHRESHOLD + thresholdadjust){
         else if (robot.colorsensorR.blue() > robot.colorsensorR.red() && robot.colorsensorR.blue() >= BLUETHRESHOLD) {
             // "act on blue"
             // display all reading data
