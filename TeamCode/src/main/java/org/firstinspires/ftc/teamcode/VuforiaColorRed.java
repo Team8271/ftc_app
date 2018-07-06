@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -8,7 +9,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaNavigation;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuMarkInstanceId;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
@@ -27,9 +27,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * is explained in {@link ConceptVuforiaNavigation}.
  */
 
-@Autonomous(name="VuforiaColorBlue", group ="Concept")
+@Autonomous(name="VuforiaColorRed", group ="Concept")
 @Disabled
-public class VuforiaColorBlue extends LinearOpMode {
+public class VuforiaColorRed extends LinearOpMode {
 
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup(); //get hardware members from HardwareSetUp class
 
@@ -47,10 +47,10 @@ public class VuforiaColorBlue extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        double LEFT_SERVO_CLOSED = 0.9;// The bigger the number the tighter the grasp of the servo
+        double LEFT_SERVO_CLOSED = 0.8;// The bigger the number the tighter the grasp of the servo
         double LEFT_SERVO_OPEN = 0.5;
 
-        double RIGHT_SERVO_CLOSED = 0.1;// The smaller the number, the tighter the grasp of the servo
+        double RIGHT_SERVO_CLOSED = 0.2;// The smaller the number, the tighter the grasp of the servo
         double RIGHT_SERVO_OPEN = 0.5;
 
         robot.init(hardwareMap); // get initializatin of hardware from HardwareSetUp class
@@ -88,9 +88,9 @@ public class VuforiaColorBlue extends LinearOpMode {
         VuforiaTrackable relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
-
+        //create telemetry that provides information whether or not the sensors are
+        //seeing the jewels.
         while (!opModeIsActive()) {
-            //create telemetry for the robot. This allows us to know if the sensor is seeing a color
             telemetry.addLine("Red Alliance Sensor--");
             telemetry.addData("Red Value:  ", robot.colorsensorR.red());
             telemetry.addData("Blue Value: ", robot.colorsensorR.blue());
@@ -110,12 +110,12 @@ public class VuforiaColorBlue extends LinearOpMode {
 
 
         //Have sensor position to be up
-        robot.colorservoLeft.setPosition(0.5);
+        robot.colorservoLeft.setPosition(.5);
         sleep(500);
-        robot.colorservoRight.setPosition(0.5);
+        robot.colorservoRight.setPosition(.5);
         sleep(500);
         //Positions Right sensor to be sensing the jewel
-        robot.colorservoLeft.setPosition(0.9);//Down
+        robot.colorservoRight.setPosition(.01);//Down
         sleep(3000);
 
         // Set threshold values for red/blue color sensor readings
@@ -132,13 +132,14 @@ public class VuforiaColorBlue extends LinearOpMode {
             telemetry.addData("Blue Value: ", robot.colorsensorR.blue());
 
             telemetry.update();
+            //if it the sensor sees red, then the robot will do the following
 
-
-            TurnLeft(0.25, 300);
+            TurnLeft(.25, 300);
             StopDrivingTime(500);
-            TurnRight(0.25, 300);
+            TurnRight(.25, 300);
             StopDrivingTime(1000);
         }
+        // else if (robot.colorsensorR.blue() > robot.colorsensorR.red() && robot.colorsensorR.blue() >= BLUETHRESHOLD + thresholdadjust){
         else if (robot.colorsensorR.blue() > robot.colorsensorR.red() && robot.colorsensorR.blue() >= BLUETHRESHOLD) {
             // "act on blue"
             // display all reading data
@@ -149,9 +150,11 @@ public class VuforiaColorBlue extends LinearOpMode {
 
             telemetry.update();
 
-            TurnRight(0.25, 300);
+            //if the sensor sees blue, then the robot will do the following
+
+            TurnRight(.25,500);
             StopDrivingTime(500);
-            TurnLeft(0.25, 300);
+            TurnRight(.25, 300);
             StopDrivingTime(1000);
         } else {
             // reading un-reliable so do no harm
@@ -165,10 +168,11 @@ public class VuforiaColorBlue extends LinearOpMode {
         }
 
 
-        // wait one second then reposition servos up
+        // wait two seconds then reposition servos up
         sleep(2000);
 
     while (opModeIsActive()) {
+        //create a timer for the vuforia
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
 
@@ -178,7 +182,7 @@ public class VuforiaColorBlue extends LinearOpMode {
         {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
         }
-
+            // in case that the vuforia does not work
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) // if vuMark is NOT UNKNOWN run autoCode for value seen
             {
 
@@ -186,7 +190,7 @@ public class VuforiaColorBlue extends LinearOpMode {
                 telemetry.update();
 
 
-                if (vuMark == RelicRecoveryVuMark.LEFT) {
+                if (vuMark == RelicRecoveryVuMark.RIGHT) {
                     // autonomous code here...
                     //close
                     robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
@@ -196,7 +200,7 @@ public class VuforiaColorBlue extends LinearOpMode {
 
                     DriveForwardTime(DRIVE_POWER, 1900);
                     StopDrivingTime(500);
-                    TurnLeft(0.5, 800);
+                    TurnRight(0.5, 800);
                     StopDrivingTime(1000);
                     DriveForwardTime(DRIVE_POWER, 500);
                     //open
@@ -216,7 +220,7 @@ public class VuforiaColorBlue extends LinearOpMode {
 
                     DriveForwardTime(DRIVE_POWER, 2400);
                     StopDrivingTime(500);
-                    TurnLeft(0.5, 800);
+                    TurnRight(0.5, 800);
                     StopDrivingTime(500);
                     DriveForwardTime(DRIVE_POWER, 500);
                     //open
@@ -227,8 +231,8 @@ public class VuforiaColorBlue extends LinearOpMode {
                     DriveForwardTime(-0.25, 20);
 
 
-                } else if (vuMark == RelicRecoveryVuMark.RIGHT) {
-                    //close
+                } else if (vuMark == RelicRecoveryVuMark.LEFT) {
+                    //close servos
                     robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
                     robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
                     robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
@@ -237,13 +241,13 @@ public class VuforiaColorBlue extends LinearOpMode {
 
                     DriveForwardTime(DRIVE_POWER, 2150);
                     StopDrivingTime(500);
-                    TurnLeft(0.5, 400);
+                    TurnRight(0.5, 400);
                     StopDrivingTime(200);
                     DriveForwardTime(0.5, 350);
                     StopDrivingTime(500);
-                    TurnLeft(0.5, 400);
+                    TurnRight(0.5, 400);
                     DriveForwardTime(DRIVE_POWER, 500);
-                    //open
+                    //open servos
                     robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
                     robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
                     robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
@@ -264,8 +268,8 @@ public class VuforiaColorBlue extends LinearOpMode {
     } //RunOpMode
 
 
-        //create various functions for the robot during autonomous.
-    double DRIVE_POWER = 0.5;
+        //create  various functions for the robot during autonomous
+    double DRIVE_POWER = .5;
 
     public void DriveForward(double power) {
         robot.motorLeft.setPower(-power);
@@ -273,7 +277,7 @@ public class VuforiaColorBlue extends LinearOpMode {
     }
 
     public void DriveForwardTime(double power, long time) throws InterruptedException {
-        DriveForward(-power);
+        DriveForward(power);
         Thread.sleep(time);
     }
 

@@ -32,6 +32,8 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package org.firstinspires.ftc.teamcode;
 
+
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -45,7 +47,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  */
 
 @Autonomous(name="Knight AutoByTimeRedV2", group="KnightAutonomous")  // @TeleOp(...) is the other common choice
-//@Disabled
+@Disabled
 public class KnightAutoDriveByTimeRedV2 extends LinearOpMode {
 
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup();

@@ -29,6 +29,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaNavigation;
@@ -52,8 +53,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * is explained in {@link ConceptVuforiaNavigation}.
  */
 
-@Autonomous(name="KnightVuforiaRed", group ="KnightAutonomous")
-//@Disabled
+@Autonomous(name="KnightVuforiaRed", group ="Vuforia")
+@Disabled
 public class KnightVuforiaRed extends LinearOpMode {
 
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup(); //get hardware members from HardwareSetUp class
@@ -69,6 +70,12 @@ public class KnightVuforiaRed extends LinearOpMode {
     VuforiaLocalizer vuforia;
 
     @Override public void runOpMode() throws InterruptedException {
+
+        double LEFT_SERVO_CLOSED = 0.9;// The bigger the number the tighter the grasp of the servo
+        double LEFT_SERVO_OPEN = 0.5;
+
+        double RIGHT_SERVO_CLOSED = 0.1;// The smaller the number, the tighter the grasp of the servo
+        double RIGHT_SERVO_OPEN = 0.5;
 
         robot.init(hardwareMap); // get initializatin of hardware from HardwareSetUp class
 
@@ -135,42 +142,46 @@ public class KnightVuforiaRed extends LinearOpMode {
                 if (vuMark == RelicRecoveryVuMark.RIGHT) {
                     // autonomous code here...
                     //close
-                    robot.servoHandTopLeft.setPosition(0.6);
-                    robot.servoHandTopRight.setPosition(0.4);
-                    robot.servoHandBottomLeft.setPosition(0.6);
-                    robot.servoHandBottomRight.setPosition(0.4);
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
 
+
+                    StopDrivingTime(1000);
                     DriveForwardTime(DRIVE_POWER, 2100);
-                    StopDrivingTime(500);
+                    StopDrivingTime(50);
                     TurnRight(0.5, 800);
                     StopDrivingTime(1000);
                     DriveForwardTime(DRIVE_POWER, 500);
                     //open
-                    robot.servoHandTopLeft.setPosition(0.8);
-                    robot.servoHandTopRight.setPosition(0.2);
-                    robot.servoHandBottomLeft.setPosition(0.8);
-                    robot.servoHandBottomRight.setPosition(0.2);
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
                     DriveForwardTime(-0.25,20);
 
                 }
                 else if (vuMark == RelicRecoveryVuMark.CENTER){
                     // autonomous code here..
                     //close
-                    robot.servoHandTopLeft.setPosition(0.6);
-                    robot.servoHandTopRight.setPosition(0.4);
-                    robot.servoHandBottomLeft.setPosition(0.6);
-                    robot.servoHandBottomRight.setPosition(0.4);
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
 
+
+                    StopDrivingTime(1000);
                     DriveForwardTime(DRIVE_POWER, 2550);
                     StopDrivingTime(500);
                     TurnRight(0.5,800);
                     StopDrivingTime(500);
                     DriveForwardTime(DRIVE_POWER,500);
                     //open
-                    robot.servoHandTopLeft.setPosition(0.8);
-                    robot.servoHandTopRight.setPosition(0.2);
-                    robot.servoHandBottomLeft.setPosition(0.8);
-                    robot.servoHandBottomRight.setPosition(0.2);
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
                     DriveForwardTime(-0.45,20);
 
 
@@ -179,11 +190,13 @@ public class KnightVuforiaRed extends LinearOpMode {
 
                     //grab the gliph
 
-                    robot.servoHandTopLeft.setPosition(0.6);
-                    robot.servoHandTopRight.setPosition(0.4);
-                    robot.servoHandBottomLeft.setPosition(0.6);
-                    robot.servoHandBottomRight.setPosition(0.4);
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
 
+
+                    StopDrivingTime(1000);
                     DriveForwardTime(DRIVE_POWER, 2150);
                     StopDrivingTime(500);
                     TurnRight(0.5,400);
@@ -193,10 +206,10 @@ public class KnightVuforiaRed extends LinearOpMode {
                     TurnRight(0.5,400);
                     DriveForwardTime(DRIVE_POWER,500);
                     //open
-                    robot.servoHandTopLeft.setPosition(0.8);
-                    robot.servoHandTopRight.setPosition(0.2);
-                    robot.servoHandBottomLeft.setPosition(0.8);
-                    robot.servoHandBottomRight.setPosition(0.2);
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
                     DriveForwardTime(-0.45,20);
 
 
@@ -215,12 +228,12 @@ public class KnightVuforiaRed extends LinearOpMode {
 
     /** Below: Basic Drive Methods used in Autonomous code...**/
     //set Drive Power variable
-    double DRIVE_POWER = .5;
+    double DRIVE_POWER = 0.5;
 
     public void DriveForward(double power)
     {
-        robot.motorLeft.setPower(power);
-        robot.motorRight.setPower(power);
+        robot.motorLeft.setPower(-power);
+        robot.motorRight.setPower(-power);
     }
 
     public void DriveForwardTime(double power, long time) throws InterruptedException
@@ -241,8 +254,8 @@ public class KnightVuforiaRed extends LinearOpMode {
 
     public void TurnLeft(double power, long time) throws InterruptedException
     {
-        robot.motorLeft.setPower(-power);
-        robot.motorRight.setPower(power);
+        robot.motorLeft.setPower(power);
+        robot.motorRight.setPower(-power);
         Thread.sleep(time);
     }
 
@@ -253,12 +266,12 @@ public class KnightVuforiaRed extends LinearOpMode {
 
     public void RaiseArm()
     {
-        robot.motorArm.setPower(.8); //note: uses servo instead of motor.
+        robot.motorArm.setPower(0.8); //note: uses servo instead of motor.
     }
 
     public void LowerArm()
     {
-        robot.motorArm.setPower(.2);
+        robot.motorArm.setPower(0.2);
     }
 
 }//MyConceptVuforia

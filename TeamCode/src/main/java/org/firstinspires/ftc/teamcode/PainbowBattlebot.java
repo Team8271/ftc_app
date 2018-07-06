@@ -1,12 +1,10 @@
 
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 /**
  * All device access is managed through the OurRobotHardwareSetup class.
@@ -19,12 +17,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *
  */
 
-@TeleOp(name="KnightTeleop", group="Competition")
+@TeleOp(name="Painbow", group="Competition")
 //@Disabled
-public class KnightTeleop extends LinearOpMode {
+public class PainbowBattlebot extends LinearOpMode {
 
     /* Declare Hardware */
-    OurRobotHardwareSetup robot = new OurRobotHardwareSetup();   // Use a hardware setup class
+    painbowHardwareSetup robot = new painbowHardwareSetup();   // Use a hardware setup class
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -110,14 +108,14 @@ public class KnightTeleop extends LinearOpMode {
             // Uses Encoder values to set upper and lower limits to protect motors from over-driving lift
             // and to hold arm position on decent to account for gravitational inertia
 
-            if (gamepad2.right_stick_y > 0.0 ) // joystick down
+            if (gamepad1.right_stick_y > 0.0 ) // joystick down
             {
-                robot.motorArm.setPower(-gamepad2.right_stick_y/3); // let stick drive UP (note this is positive value on joystick)
+                robot.motorArm.setPower(-gamepad1.right_stick_y/3); // let stick drive UP (note this is positive value on joystick)
                 armHoldPosition = robot.motorArm.getCurrentPosition(); // while the lift is moving, continuously reset the arm holding position
 
-            } else if (gamepad2.right_stick_y < 0.0 ) //joystick up
+            } else if (gamepad1.right_stick_y < 0.0 ) //joystick up
             {
-                robot.motorArm.setPower(-gamepad2.right_stick_y); //let stick drive DOWN (note this is negative value on joystick)
+                robot.motorArm.setPower(-gamepad1.right_stick_y); //let stick drive DOWN (note this is negative value on joystick)
                 armHoldPosition = robot.motorArm.getCurrentPosition(); // while the lift is moving, continuously reset the arm holding position
             } else //triggers are released - try to maintain the current position
             {
@@ -134,54 +132,34 @@ public class KnightTeleop extends LinearOpMode {
             // to control four 'Hand' Servos
             // together or independently
             if (gamepad2.a) //button 'a' will open servos
-            {
-                robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
-                robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
-                robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
-                robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                {
 
-                topOpen = true;
-                bottomOpen = true; //update the current position of the servos
 
-            } else if (gamepad2.b) //button 'b' will close servos
-            {
-                robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
-                robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
-                robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
-                robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                    topOpen = true;
+                    bottomOpen = true; //update the current position of the servos
 
-                topOpen = false;
-                bottomOpen = false; // update current position of the servos.
+                } else if (gamepad2.b) //button 'b' will close servos
+                {
 
-            } else {
-                if (gamepad2.y && !ypressed) {
-                    if (topOpen) {
-                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
-                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
 
-                        topOpen = false;
-                    } else {
-                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
-                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                    topOpen = false;
+                    bottomOpen = false; // update current position of the servos.
 
-                        topOpen = true;
+                } else {
+                    if (gamepad2.y && !ypressed) {
+                        if (topOpen) {
+
+
+                            topOpen = false;
+                        } else {
+
+
+                            topOpen = true;
+                        }
+
                     }
 
-                }
 
-                if (gamepad2.x && !xpressed) {
-                    if (bottomOpen) {
-                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
-                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
-
-                        bottomOpen = false;
-                    } else {
-                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
-                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
-
-                        bottomOpen = true;
-                    }
-                }
             }
 
             xpressed = gamepad2.x;

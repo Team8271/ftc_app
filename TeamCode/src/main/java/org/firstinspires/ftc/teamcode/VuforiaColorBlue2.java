@@ -12,6 +12,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuMarkInstanceId;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 /**
  * This OpMode illustrates the basics of using the Vuforia engine to determine
@@ -25,9 +26,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * is explained in {@link ConceptVuforiaNavigation}.
  */
 
-@Autonomous(name="VuforiaColorBlue", group ="Concept")
-//@Disabled
-public class ColorReaderTestRed extends LinearOpMode {
+@Autonomous(name="VuforiaColorBlue2", group ="Concept")
+@Disabled
+public class VuforiaColorBlue2 extends LinearOpMode {
 
     OurRobotHardwareSetup robot = new OurRobotHardwareSetup(); //get hardware members from HardwareSetUp class
 
@@ -44,6 +45,12 @@ public class ColorReaderTestRed extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+
+        double LEFT_SERVO_CLOSED = 0.9;// The bigger the number the tighter the grasp of the servo
+        double LEFT_SERVO_OPEN = 0.5;
+
+        double RIGHT_SERVO_CLOSED = 0.1;// The smaller the number, the tighter the grasp of the servo
+        double RIGHT_SERVO_OPEN = 0.5;
 
         robot.init(hardwareMap); // get initializatin of hardware from HardwareSetUp class
 
@@ -80,9 +87,9 @@ public class ColorReaderTestRed extends LinearOpMode {
         VuforiaTrackable relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
-        //create telemetry that provides information whether or not the sensors are
-        //seeing the jewels.
+
         while (!opModeIsActive()) {
+            //create telemetry for the robot. This allows us to know if the sensor is seeing a color
             telemetry.addLine("Red Alliance Sensor--");
             telemetry.addData("Red Value:  ", robot.colorsensorR.red());
             telemetry.addData("Blue Value: ", robot.colorsensorR.blue());
@@ -107,7 +114,7 @@ public class ColorReaderTestRed extends LinearOpMode {
         robot.colorservoRight.setPosition(.5);
         sleep(500);
         //Positions Right sensor to be sensing the jewel
-        robot.colorservoRight.setPosition(.3);//Down
+        robot.colorservoLeft.setPosition(9.9);//Down
         sleep(3000);
 
         // Set threshold values for red/blue color sensor readings
@@ -124,14 +131,13 @@ public class ColorReaderTestRed extends LinearOpMode {
             telemetry.addData("Blue Value: ", robot.colorsensorR.blue());
 
             telemetry.update();
-            //if it the sensor sees red, then the robot will do the following
 
-//            SpinLeft(.25, 300);
-//            StopDrivingTime(500);
-//            SpinRight(.25, 300);
-//            StopDrivingTime(500);
+
+            TurnLeft(.25, 300);
+            StopDrivingTime(500);
+            TurnRight(.25, 300);
+            StopDrivingTime(1000);
         }
-        // else if (robot.colorsensorR.blue() > robot.colorsensorR.red() && robot.colorsensorR.blue() >= BLUETHRESHOLD + thresholdadjust){
         else if (robot.colorsensorR.blue() > robot.colorsensorR.red() && robot.colorsensorR.blue() >= BLUETHRESHOLD) {
             // "act on blue"
             // display all reading data
@@ -142,12 +148,10 @@ public class ColorReaderTestRed extends LinearOpMode {
 
             telemetry.update();
 
-            //if the sensor sees blue, then the robot will do the following
-
-//            SpinRight(.25, 300);
-//            StopDrivingTime(500);
-//            SpinLeft(.25, 300);
-//            StopDrivingTime(500);
+            TurnRight(.25, 300);
+            StopDrivingTime(500);
+            TurnLeft(.25, 300);
+            StopDrivingTime(1000);
         } else {
             // reading un-reliable so do no harm
             // display all reading data
@@ -160,11 +164,10 @@ public class ColorReaderTestRed extends LinearOpMode {
         }
 
 
-        // wait two seconds then reposition servos up
+        // wait one second then reposition servos up
         sleep(2000);
 
     while (opModeIsActive()) {
-        //create a timer for the vuforia
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
 
@@ -174,7 +177,7 @@ public class ColorReaderTestRed extends LinearOpMode {
         {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
         }
-            // in case that the vuforia does not work
+
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) // if vuMark is NOT UNKNOWN run autoCode for value seen
             {
 
@@ -185,10 +188,10 @@ public class ColorReaderTestRed extends LinearOpMode {
                 if (vuMark == RelicRecoveryVuMark.LEFT) {
                     // autonomous code here...
                     //close
-                    robot.servoHandBottomLeft.setPosition(0.6);
-                    robot.servoHandBottomRight.setPosition(0.4);
-                    robot.servoHandTopLeft.setPosition(0.6);
-                    robot.servoHandTopRight.setPosition(0.4);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
 
                     DriveForwardTime(DRIVE_POWER, 1900);
                     StopDrivingTime(500);
@@ -196,19 +199,19 @@ public class ColorReaderTestRed extends LinearOpMode {
                     StopDrivingTime(1000);
                     DriveForwardTime(DRIVE_POWER, 500);
                     //open
-                    robot.servoHandTopLeft.setPosition(0.8);
-                    robot.servoHandTopRight.setPosition(0.2);
-                    robot.servoHandBottomLeft.setPosition(0.8);
-                    robot.servoHandBottomRight.setPosition(0.2);
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
                     DriveForwardTime(-0.25, 20);
 
                 } else if (vuMark == RelicRecoveryVuMark.CENTER) {
                     // autonomous code here..
                     //close
-                    robot.servoHandTopLeft.setPosition(0.6);
-                    robot.servoHandTopRight.setPosition(0.4);
-                    robot.servoHandBottomLeft.setPosition(0.6);
-                    robot.servoHandBottomRight.setPosition(0.4);
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
 
                     DriveForwardTime(DRIVE_POWER, 2400);
                     StopDrivingTime(500);
@@ -216,19 +219,19 @@ public class ColorReaderTestRed extends LinearOpMode {
                     StopDrivingTime(500);
                     DriveForwardTime(DRIVE_POWER, 500);
                     //open
-                    robot.servoHandTopLeft.setPosition(0.8);
-                    robot.servoHandTopRight.setPosition(0.2);
-                    robot.servoHandBottomLeft.setPosition(0.8);
-                    robot.servoHandBottomRight.setPosition(0.2);
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
                     DriveForwardTime(-0.25, 20);
 
 
                 } else if (vuMark == RelicRecoveryVuMark.RIGHT) {
-                    //close servos
-                    robot.servoHandTopLeft.setPosition(0.6);
-                    robot.servoHandTopRight.setPosition(0.4);
-                    robot.servoHandBottomLeft.setPosition(0.6);
-                    robot.servoHandBottomRight.setPosition(0.4);
+                    //close
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
 
 
                     DriveForwardTime(DRIVE_POWER, 2150);
@@ -239,11 +242,11 @@ public class ColorReaderTestRed extends LinearOpMode {
                     StopDrivingTime(500);
                     TurnLeft(0.5, 400);
                     DriveForwardTime(DRIVE_POWER, 500);
-                    //open servos
-                    robot.servoHandTopLeft.setPosition(0.8);
-                    robot.servoHandTopRight.setPosition(0.2);
-                    robot.servoHandBottomLeft.setPosition(0.8);
-                    robot.servoHandBottomRight.setPosition(0.2);
+                    //open
+                    robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                    robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                    robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
                     DriveForwardTime(-0.25, 20);
 
                 }
@@ -260,16 +263,16 @@ public class ColorReaderTestRed extends LinearOpMode {
     } //RunOpMode
 
 
-        //create  various functions for the robot during autonomous
+        //create various functions for the robot during autonomous.
     double DRIVE_POWER = .5;
 
     public void DriveForward(double power) {
-        robot.motorLeft.setPower(power);
-        robot.motorRight.setPower(power);
+        robot.motorLeft.setPower(-power);
+        robot.motorRight.setPower(-power);
     }
 
     public void DriveForwardTime(double power, long time) throws InterruptedException {
-        DriveForward(power);
+        DriveForward(-power);
         Thread.sleep(time);
     }
 
@@ -282,13 +285,13 @@ public class ColorReaderTestRed extends LinearOpMode {
     }
 
     public void TurnLeft(double power, long time) throws InterruptedException {
-        robot.motorLeft.setPower(-power);
-        robot.motorRight.setPower(power);
+        robot.motorLeft.setPower(power);
+        robot.motorRight.setPower(-power);
         Thread.sleep(time);
     }
 
     public void TurnRight(double power, long time) throws InterruptedException {
-        TurnLeft(-power, time);
+        TurnLeft(power, time);
     }
 
     public void RaiseArm() {

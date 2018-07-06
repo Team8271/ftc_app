@@ -61,8 +61,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 
 
-    @Autonomous(name = "KnightVuforiaBlue", group = "KnightAutonomous")
-//@Disabled
+    @Autonomous(name = "KnightVuforiaBlue", group = "Vuforia")
+@Disabled
     public class KnightVuforiaBlue extends LinearOpMode {
 
         OurRobotHardwareSetup robot = new OurRobotHardwareSetup(); //get hardware members from HardwareSetUp class
@@ -79,6 +79,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
         @Override
         public void runOpMode() throws InterruptedException {
+
+            double LEFT_SERVO_CLOSED = 0.9;// The bigger the number the tighter the grasp of the servo
+            double LEFT_SERVO_OPEN = 0.5;
+
+            double RIGHT_SERVO_CLOSED = 0.1;// The smaller the number, the tighter the grasp of the servo
+            double RIGHT_SERVO_OPEN = 0.5;
 
             robot.init(hardwareMap); // get initializatin of hardware from HardwareSetUp class
 
@@ -145,53 +151,59 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                     if (vuMark == RelicRecoveryVuMark.LEFT) {
                         // autonomous code here...
                         //close
-                        robot.servoHandBottomLeft.setPosition(0.6);
-                        robot.servoHandBottomRight.setPosition(0.4);
-                        robot.servoHandTopLeft.setPosition(0.6);
-                        robot.servoHandTopRight.setPosition(0.4);
+                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
+                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
 
-                        DriveForwardTime(DRIVE_POWER, 1900);
+
+
+                        StopDrivingTime(1000);
+                        DriveForwardTime(DRIVE_POWER, 1600);
                         StopDrivingTime(500);
                         TurnLeft(0.5, 800);
                         StopDrivingTime(1000);
                         DriveForwardTime(DRIVE_POWER, 500);
                         //open
-                        robot.servoHandTopLeft.setPosition(0.8);
-                        robot.servoHandTopRight.setPosition(0.2);
-                        robot.servoHandBottomLeft.setPosition(0.8);
-                        robot.servoHandBottomRight.setPosition(0.2);
+                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
                         DriveForwardTime(-0.25, 20);
 
                     } else if (vuMark == RelicRecoveryVuMark.CENTER) {
                         // autonomous code here..
                         //close
-                        robot.servoHandTopLeft.setPosition(0.6);
-                        robot.servoHandTopRight.setPosition(0.4);
-                        robot.servoHandBottomLeft.setPosition(0.6);
-                        robot.servoHandBottomRight.setPosition(0.4);
+                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
+                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
 
-                        DriveForwardTime(DRIVE_POWER, 2400);
-                        StopDrivingTime(500);
+
+                        StopDrivingTime(1000);
+                        DriveForwardTime(DRIVE_POWER, 1800);
+                        StopDrivingTime(1000);
                         TurnLeft(0.5, 800);
                         StopDrivingTime(500);
                         DriveForwardTime(DRIVE_POWER, 500);
                         //open
-                        robot.servoHandTopLeft.setPosition(0.8);
-                        robot.servoHandTopRight.setPosition(0.2);
-                        robot.servoHandBottomLeft.setPosition(0.8);
-                        robot.servoHandBottomRight.setPosition(0.2);
+                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
                         DriveForwardTime(-0.25, 20);
 
 
                     } else if (vuMark == RelicRecoveryVuMark.RIGHT) {
 
-                        robot.servoHandTopLeft.setPosition(0.6);
-                        robot.servoHandTopRight.setPosition(0.4);
-                        robot.servoHandBottomLeft.setPosition(0.6);
-                        robot.servoHandBottomRight.setPosition(0.4);
+                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_CLOSED);
+                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_CLOSED);
+                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_CLOSED);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_CLOSED);
 
 
-                        DriveForwardTime(DRIVE_POWER, 2150);
+                        StopDrivingTime(1000);
+                        DriveForwardTime(DRIVE_POWER, 2000);
                         StopDrivingTime(500);
                         TurnLeft(0.5, 400);
                         StopDrivingTime(200);
@@ -200,10 +212,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
                         TurnLeft(0.5, 400);
                         DriveForwardTime(DRIVE_POWER, 500);
                         //open
-                        robot.servoHandTopLeft.setPosition(0.8);
-                        robot.servoHandTopRight.setPosition(0.2);
-                        robot.servoHandBottomLeft.setPosition(0.8);
-                        robot.servoHandBottomRight.setPosition(0.2);
+                        robot.servoHandTopLeft.setPosition(LEFT_SERVO_OPEN);
+                        robot.servoHandTopRight.setPosition(RIGHT_SERVO_OPEN);
+                        robot.servoHandBottomLeft.setPosition(LEFT_SERVO_OPEN);
+                        robot.servoHandBottomRight.setPosition(RIGHT_SERVO_OPEN);
                         DriveForwardTime(-0.25, 20);
 
                     }
@@ -222,7 +234,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
          * Below: Basic Drive Methods used in Autonomous code...
          **/
         //set Drive Power variable
-        double DRIVE_POWER = .5;
+        double DRIVE_POWER = 0.5;
 
         public void DriveForward(double power) {
             robot.motorLeft.setPower(-power);
@@ -253,11 +265,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
         }
 
         public void RaiseArm() {
-            robot.motorArm.setPower(.8); //note: uses servo instead of motor.
+            robot.motorArm.setPower(.4); //note: uses servo instead of motor.
         }
 
         public void LowerArm() {
             robot.motorArm.setPower(.2);
         }
+
 
     }//MyConceptVuforia
