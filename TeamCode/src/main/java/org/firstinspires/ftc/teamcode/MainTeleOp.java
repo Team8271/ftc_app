@@ -46,35 +46,23 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="test: TeleOp", group="Examples")  // @Autonomous(...) is the other common choice
+@TeleOp(name="Main TeleOp", group="Competition")  // @Autonomous(...) is the other common choice
 //@Disabled
-public class TeleOp_test_program2 extends LinearOpMode { /* Declare OpMode members. */
+public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
 
+    //Declare robot hardware
     Our_HardwareSetup robot      = new Our_HardwareSetup();
-
-    //motors
-
 
     @Override
     public void runOpMode() throws InterruptedException {
 
+        //initialize robot hardware
         robot.init(hardwareMap);
-
 
         //adds feedback telemetry to DS
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-
-        /* eg: Initialize the hardware variables. Note that the strings used here as parameters
-         * to 'get' must correspond to the names assigned during the robot configuration
-         * step (using the FTC Robot Controller app on the phone).
-         */
-
-        // eg: Set the drive motor directions:
-        // "Reverse" the motor that runs backwards when connected directly to the battery
-         // Set to FORWARD if using AndyMark motors
-
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -88,26 +76,33 @@ public class TeleOp_test_program2 extends LinearOpMode { /* Declare OpMode membe
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.update();
 
+            //read arm position
+
+
             // tank drive set to gamepad1 joysticks
             //(note: The joystick goes negative when pushed forwards)
             robot.motorLeft.setPower(gamepad1.left_stick_y /4);
             robot.motorRight.setPower(gamepad1.right_stick_y /4);
 
-            // Arm Control - Uses dual buttons to control motor direction
+            // Arm Control - Uses dual buttons to control motor direction && encoder to hold position
+            robot.armHoldPosition = robot.motorArm.getCurrentPosition();
+            
             if(gamepad2.right_bumper)
             {
                 robot.motorArm.setPower(-gamepad2.right_trigger); // if both Bumper + Trigger, then negative power, runs arm down
-                //read current position
+                robot.armHoldPosition = robot.motorArm.getCurrentPosition(); // update position
             }
             else if (!gamepad2.right_bumper)
             {
                 robot.motorArm.setPower(gamepad2.right_trigger);  // else trigger positive value, runs arm up
-                //read current position
+                robot.armHoldPosition = robot.motorArm.getCurrentPosition(); // update position
             }
             else
             {
                 //hold motor position
+                robot.motorArm.setPower((double)(robot.armHoldPosition - robot.motorArm.getCurrentPosition()) / robot.slopeVal );
             }
+
 
             //servo commands
             if(gamepad2.a) //button 'a' will open

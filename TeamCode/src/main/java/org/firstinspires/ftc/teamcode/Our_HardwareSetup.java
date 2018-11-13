@@ -50,7 +50,8 @@ public class Our_HardwareSetup {
     final static double OPEN = 0.8;
     final static double MOTOR_STOP = 0.0; // sets motor power to zero
 
-
+    int     armHoldPosition;             // reading of arm position when buttons released to hold
+    double  slopeVal         = 2000.0;   // increase or decrease to perfect
     //CR servo variables
     //double SpinLeft = 0.1;
     //double SpinRight = 0.6;
