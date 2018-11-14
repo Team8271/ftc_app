@@ -37,13 +37,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
- * This file contains an minimal example of a Linear Tele "OpMode".
- *
- * This particular OpMode just executes a basic Tank Drive, Arm and 2 Servos for a PushBot
- * It includes all the skeletal structure that all linear OpModes contain.
- *
- * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
- * Comment out the @Disabled line to add this opmode to the Driver Station OpMode list
+ * This file is our main teleOp
  */
 
 @TeleOp(name="Main TeleOp", group="Competition")  // @Autonomous(...) is the other common choice
@@ -71,6 +65,7 @@ public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
         /************************
          * TeleOp Code Below://
          *************************/
+        robot.armHoldPosition = robot.motorArm.getCurrentPosition();
 
         while (opModeIsActive()) {  // run until the end of the match (driver presses STOP)
             telemetry.addData("Status", "Run Time: " + runtime.toString());
@@ -85,8 +80,8 @@ public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
             robot.motorRight.setPower(gamepad1.right_stick_y /4);
 
             // Arm Control - Uses dual buttons to control motor direction && encoder to hold position
-            robot.armHoldPosition = robot.motorArm.getCurrentPosition();
-            
+
+
             if(gamepad2.right_bumper)
             {
                 robot.motorArm.setPower(-gamepad2.right_trigger); // if both Bumper + Trigger, then negative power, runs arm down
@@ -107,11 +102,11 @@ public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
             //servo commands
             if(gamepad2.a) //button 'a' will open
             {
-                robot.servoHandR.setPosition(robot.OPEN);
+                robot.servoHand.setPosition(robot.OPEN);
             }
             else if (gamepad2.b) //button 'b' will close
             {
-                robot.servoHandR.setPosition(robot.OPEN);
+                robot.servoHand.setPosition(robot.CLOSED);
             }
 
 

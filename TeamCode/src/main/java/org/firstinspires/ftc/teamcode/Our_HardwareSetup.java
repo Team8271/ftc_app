@@ -34,7 +34,7 @@ public class Our_HardwareSetup {
 
     //servos
 
-    public Servo servoHandR = null;
+    public Servo servoHand = null;
     //public Servo servoHandR = null;
     //public Servo crServo    = null;
 
@@ -97,15 +97,15 @@ public class Our_HardwareSetup {
          ************************************************************/
         // Define Motors to match Robot Configuration File
 
-        servoHandR = hwMap.servo.get("SHR");
+        servoHand = hwMap.servo.get("SHR");
         //servoHandR = hwMap.servo.get("servoHandR");
         //crServo    = hwMap.servo.get("crServo");
 
 
 
         //Set servo hand grippers to open position.
-        servoHandR.setPosition(OPEN);
-        servoHandR.setPosition(CLOSED);
+        servoHand.setPosition(OPEN);
+        servoHand.setPosition(CLOSED);
         //servoHandR.setPosition(OPEN);
 
         //Continous Rotation Servo
