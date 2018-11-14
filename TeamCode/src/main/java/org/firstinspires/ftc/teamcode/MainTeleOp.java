@@ -99,6 +99,24 @@ public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
                 robot.motorArm.setPower((double)(robot.armHoldPosition - robot.motorArm.getCurrentPosition()) / robot.slopeVal );
             }
 
+            // Lift Control - Uses dual buttons to control motor direction && encoder to hold position
+
+            if (gamepad2.left_bumper && gamepad2.left_trigger > 0.2)  // using 0.2 instead of 0.0 as a threshold in case the trigger does not fully release
+            {
+                robot.motorLift.setPower(-gamepad2.left_trigger); // if both Bumper + Trigger, then negative power, runs lift down
+                robot.liftHoldPosition = robot.motorLift.getCurrentPosition(); // update position
+            }
+            else if (!gamepad2.left_bumper && gamepad2.left_trigger > 0.2)
+            {
+                robot.motorLift.setPower(gamepad2.left_trigger);  // else trigger positive value, runs arm up
+                robot.liftHoldPosition = robot.motorLift.getCurrentPosition(); // update position
+            }
+            else
+            {
+                //hold motor position
+                robot.motorLift.setPower((double)(robot.liftHoldPosition - robot.motorLift.getCurrentPosition()) / robot.slopeVal );
+            }
+
 
             //servo commands
             if(gamepad2.a) //button 'a' will open

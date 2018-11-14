@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -31,7 +32,7 @@ public class Our_HardwareSetup {
     public DcMotor motorLeft = null;
     public DcMotor motorRight = null;
     public DcMotor motorArm = null;
-
+    public DcMotor motorLift = null;
     //servos
 
     public Servo servoHand = null;
@@ -50,7 +51,8 @@ public class Our_HardwareSetup {
     final static double OPEN = 0.8;
     final static double MOTOR_STOP = 0.0; // sets motor power to zero
 
-    int     armHoldPosition;             // reading of arm position when buttons released to hold
+    int     armHoldPosition;// reading of arm position when buttons released to hold
+    int     liftHoldPosition;
     double  slopeVal         = 2000.0;   // increase or decrease to perfect
     //CR servo variables
     //double SpinLeft = 0.1;
@@ -75,22 +77,26 @@ public class Our_HardwareSetup {
         motorLeft = hwMap.dcMotor.get("ML");
         motorRight = hwMap.dcMotor.get("MR");
         motorArm = hwMap.dcMotor.get("MA");
+        motorLift = hwMap.dcMotor.get("lift");
 
         // Set the drive motor directions:
         motorLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         motorRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         motorArm.setDirection(DcMotor.Direction.FORWARD); // Can change based on motor configuration
+        motorLift.setDirection(DcMotor.Direction.FORWARD);
 
         //Keep the motors from moving during initialize.
         motorLeft.setPower(MOTOR_STOP);
         motorRight.setPower(MOTOR_STOP);
         motorArm.setPower(MOTOR_STOP);
-
-        // Set motors to run USING or WITHOUT encoders
+        motorLift.setPower(MOTOR_STOP);
+        // Set motors to run USING or WITHOUT enco
+        // ders
         // Depending upon your configuration and use
         motorArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         /************************************************************
          * SERVO SECTION
