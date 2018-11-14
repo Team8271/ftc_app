@@ -61,33 +61,34 @@ public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
+        // initialize current position of arm motor
+        robot.armHoldPosition = robot.motorArm.getCurrentPosition();
+
 
         /************************
          * TeleOp Code Below://
          *************************/
-        robot.armHoldPosition = robot.motorArm.getCurrentPosition();
-
         while (opModeIsActive()) {  // run until the end of the match (driver presses STOP)
             telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("armPosition: ", + robot.motorArm.getCurrentPosition());
+            telemetry.addData("armHoldPosition: ", + robot.armHoldPosition);
+
             telemetry.update();
-
-            //read arm position
-
 
             // tank drive set to gamepad1 joysticks
             //(note: The joystick goes negative when pushed forwards)
             robot.motorLeft.setPower(gamepad1.left_stick_y /4);
             robot.motorRight.setPower(gamepad1.right_stick_y /4);
 
+
             // Arm Control - Uses dual buttons to control motor direction && encoder to hold position
 
-
-            if(gamepad2.right_bumper)
+            if (gamepad2.right_bumper && gamepad2.right_trigger > 0.2)  // using 0.2 instead of 0.0 as a threshold in case the trigger does not fully release
             {
                 robot.motorArm.setPower(-gamepad2.right_trigger); // if both Bumper + Trigger, then negative power, runs arm down
                 robot.armHoldPosition = robot.motorArm.getCurrentPosition(); // update position
             }
-            else if (!gamepad2.right_bumper)
+            else if (!gamepad2.right_bumper && gamepad2.right_trigger > 0.2)
             {
                 robot.motorArm.setPower(gamepad2.right_trigger);  // else trigger positive value, runs arm up
                 robot.armHoldPosition = robot.motorArm.getCurrentPosition(); // update position
@@ -108,12 +109,6 @@ public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
             {
                 robot.servoHand.setPosition(robot.CLOSED);
             }
-
-
-
-
-
-
 
             idle(); // Always call idle() at the bottom of your while(opModeIsActive()) loop
         }
