@@ -49,7 +49,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="Example AutoByTime", group="Test")  // @TeleOp(...) is the other common choice
-@Disabled
+//@Disabled
 public class OurAutoDriveByTime extends LinearOpMode {
 
     /* Declare OpMode members. */
@@ -75,20 +75,12 @@ public class OurAutoDriveByTime extends LinearOpMode {
          * Autonomous Code Below://
          *************************/
         DriveForwardTime(DRIVE_POWER, 4000);
-        TurnLeft(DRIVE_POWER, 1000);
-        StopDrivingTime(2000);
 
-        DriveForwardTime(DRIVE_POWER, 4000);
-        TurnRight(DRIVE_POWER, 1000);
-        StopDrivingTime(2000);
-
-        RaiseArm();
-        DriveForwardTime(DRIVE_POWER, 4000);
         StopDriving();
 
-       
 
-    }//runOpMode
+    }//runOpM
+    // ode
 
     /** Below: Basic Drive Methods used in Autonomous code...**/
     //set Drive Power variable

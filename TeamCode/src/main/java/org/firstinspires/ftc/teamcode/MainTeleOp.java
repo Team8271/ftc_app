@@ -62,7 +62,7 @@ public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
         waitForStart();
         runtime.reset();
         // initialize current position of arm motor
-        robot.armHoldPosition = robot.motorArm.getCurrentPosition();
+        robot.liftHoldPosition = robot.motorLift.getCurrentPosition();
 
 
         /************************
@@ -70,8 +70,8 @@ public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
          *************************/
         while (opModeIsActive()) {  // run until the end of the match (driver presses STOP)
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("armPosition: ", + robot.motorArm.getCurrentPosition());
-            telemetry.addData("armHoldPosition: ", + robot.armHoldPosition);
+            telemetry.addData("LiftPosition: ", + robot.motorLift.getCurrentPosition());
+            telemetry.addData("LiftHoldPosition: ", + robot.liftHoldPosition);
 
             telemetry.update();
 
@@ -81,24 +81,20 @@ public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
             robot.motorRight.setPower(gamepad1.right_stick_y /4);
 
 
-            // Arm Control - Uses dual buttons to control motor direction && encoder to hold position
+            // Sweep Control - Uses a,b,y, to contol
 
-            if (gamepad2.right_bumper && gamepad2.right_trigger > 0.2)  // using 0.2 instead of 0.0 as a threshold in case the trigger does not fully release
+            if (gamepad2.a)  // using 0.2 instead of 0.0 as a threshold in case the trigger does not fully release
             {
-                robot.motorArm.setPower(-gamepad2.right_trigger); // if both Bumper + Trigger, then negative power, runs arm down
-                robot.armHoldPosition = robot.motorArm.getCurrentPosition(); // update position
+                robot.motorSweep.setPower(1.0); //foward
             }
-            else if (!gamepad2.right_bumper && gamepad2.right_trigger > 0.2)
+            if (gamepad2.b)
             {
-                robot.motorArm.setPower(gamepad2.right_trigger);  // else trigger positive value, runs arm up
-                robot.armHoldPosition = robot.motorArm.getCurrentPosition(); // update position
+                robot.motorSweep.setPower(-1.0); //reverse
             }
-            else
+            if (gamepad2.y)
             {
-                //hold motor position
-                robot.motorArm.setPower((double)(robot.armHoldPosition - robot.motorArm.getCurrentPosition()) / robot.slopeVal );
+                robot.motorSweep.setPower(0.0); //stop
             }
-
             // Lift Control - Uses dual buttons to control motor direction && encoder to hold position
 
             if (gamepad2.left_bumper && gamepad2.left_trigger > 0.2)  // using 0.2 instead of 0.0 as a threshold in case the trigger does not fully release
@@ -118,7 +114,7 @@ public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
             }
 
 
-            //servo commands
+            /*//servo commands
             if(gamepad2.a) //button 'a' will open
             {
                 robot.servoHand.setPosition(robot.OPEN);
@@ -127,7 +123,7 @@ public class MainTeleOp extends LinearOpMode { /* Declare OpMode members. */
             {
                 robot.servoHand.setPosition(robot.CLOSED);
             }
-
+*/
             idle(); // Always call idle() at the bottom of your while(opModeIsActive()) loop
         }
     }

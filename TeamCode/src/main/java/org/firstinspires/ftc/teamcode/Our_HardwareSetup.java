@@ -31,7 +31,7 @@ public class Our_HardwareSetup {
     //motors
     public DcMotor motorLeft = null;
     public DcMotor motorRight = null;
-    public DcMotor motorArm = null;
+    public DcMotor motorSweep = null;
     public DcMotor motorLift = null;
     //servos
 
@@ -76,24 +76,24 @@ public class Our_HardwareSetup {
         // Define Motors to match Robot Configuration File
         motorLeft = hwMap.dcMotor.get("ML");
         motorRight = hwMap.dcMotor.get("MR");
-        motorArm = hwMap.dcMotor.get("MA");
-        motorLift = hwMap.dcMotor.get("lift");
+        motorSweep = hwMap.dcMotor.get("Sweep");
+        motorLift = hwMap.dcMotor.get("Lift");
 
         // Set the drive motor directions:
         motorLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         motorRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        motorArm.setDirection(DcMotor.Direction.FORWARD); // Can change based on motor configuration
+        motorSweep.setDirection(DcMotor.Direction.FORWARD); // Can change based on motor configuration
         motorLift.setDirection(DcMotor.Direction.FORWARD);
 
         //Keep the motors from moving during initialize.
         motorLeft.setPower(MOTOR_STOP);
         motorRight.setPower(MOTOR_STOP);
-        motorArm.setPower(MOTOR_STOP);
+        motorSweep.setPower(MOTOR_STOP);
         motorLift.setPower(MOTOR_STOP);
         // Set motors to run USING or WITHOUT enco
         // ders
         // Depending upon your configuration and use
-        motorArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+       // motorSweep.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -103,15 +103,15 @@ public class Our_HardwareSetup {
          ************************************************************/
         // Define Motors to match Robot Configuration File
 
-        servoHand = hwMap.servo.get("SHR");
+       // servoHand = hwMap.servo.get("SHR");
         //servoHandR = hwMap.servo.get("servoHandR");
         //crServo    = hwMap.servo.get("crServo");
 
 
 
         //Set servo hand grippers to open position.
-        servoHand.setPosition(OPEN);
-        servoHand.setPosition(CLOSED);
+        //servoHand.setPosition(OPEN);
+        //servoHand.setPosition(CLOSED);
         //servoHandR.setPosition(OPEN);
 
         //Continous Rotation Servo
