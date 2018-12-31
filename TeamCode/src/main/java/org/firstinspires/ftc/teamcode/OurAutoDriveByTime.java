@@ -74,13 +74,11 @@ public class OurAutoDriveByTime extends LinearOpMode {
         /************************
          * Autonomous Code Below://
          *************************/
-        DriveForwardTime(DRIVE_POWER, 4000);
+        DriveForwardTime(DRIVE_POWER, 2700);
 
         StopDriving();
 
-
-    }//runOpM
-    // ode
+    }
 
     /** Below: Basic Drive Methods used in Autonomous code...**/
     //set Drive Power variable
@@ -88,8 +86,8 @@ public class OurAutoDriveByTime extends LinearOpMode {
 
     public void DriveForward(double power)
     {
-        robot.motorLeft.setPower(power);
-        robot.motorRight.setPower(power);
+        robot.motorLeft.setPower(-power);
+        robot.motorRight.setPower(-power);
     }
 
     public void DriveForwardTime(double power, long time) throws InterruptedException
@@ -120,8 +118,8 @@ public class OurAutoDriveByTime extends LinearOpMode {
         TurnLeft(-power, time);
     }
 
-    public void RaiseArm()
-    {
+   // public void RaiseArm()
+/*    {
         robot.servoHand.setPosition(.8); //note: uses servo instead of motor.
     }
 
@@ -129,6 +127,7 @@ public class OurAutoDriveByTime extends LinearOpMode {
     {
         robot.servoHand.setPosition(.2);
     }
+*/
 
 
 }//TestAutoDriveByTime

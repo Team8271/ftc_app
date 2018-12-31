@@ -32,10 +32,13 @@ public class Our_HardwareSetup {
     public DcMotor motorLeft = null;
     public DcMotor motorRight = null;
     public DcMotor motorSweep = null;
+    public DcMotor motorArm = null;
+    public DcMotor motorSlide = null;
     public DcMotor motorLift = null;
+    //public DcMotor  = null;
     //servos
 
-    public Servo servoHand = null;
+    //public Servo servoHand = null;
     //public Servo servoHandR = null;
     //public Servo crServo    = null;
 
@@ -77,18 +80,22 @@ public class Our_HardwareSetup {
         motorLeft = hwMap.dcMotor.get("ML");
         motorRight = hwMap.dcMotor.get("MR");
         motorSweep = hwMap.dcMotor.get("Sweep");
+        motorSlide = hwMap.dcMotor.get("Slide");
+        motorArm = hwMap.dcMotor.get("Arm");
         motorLift = hwMap.dcMotor.get("Lift");
-
         // Set the drive motor directions:
         motorLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         motorRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         motorSweep.setDirection(DcMotor.Direction.FORWARD); // Can change based on motor configuration
+        motorSlide.setDirection(DcMotor.Direction.FORWARD);
+        motorArm.setDirection(DcMotor.Direction.FORWARD);
         motorLift.setDirection(DcMotor.Direction.FORWARD);
-
         //Keep the motors from moving during initialize.
         motorLeft.setPower(MOTOR_STOP);
         motorRight.setPower(MOTOR_STOP);
         motorSweep.setPower(MOTOR_STOP);
+        motorSlide.setPower(MOTOR_STOP);
+        motorArm.setPower(MOTOR_STOP);
         motorLift.setPower(MOTOR_STOP);
         // Set motors to run USING or WITHOUT enco
         // ders
@@ -96,6 +103,7 @@ public class Our_HardwareSetup {
        // motorSweep.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         /************************************************************
