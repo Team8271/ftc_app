@@ -124,8 +124,8 @@ public class MainTeleOp extends LinearOpMode
             }
             else
             {
-                //hold arm position Note:
-                robot.motorArm.setPower((double)(robot.motorArm.getCurrentPosition() - robot.armHoldPosition) / robot.slopeVal );
+                //hold arm position Note: switched sign
+                robot.motorArm.setPower((double)(robot.armHoldPosition - robot.motorArm.getCurrentPosition() *-1.0 ) / robot.slopeVal );
             }
 
 
