@@ -86,7 +86,7 @@ public class MainTeleOp extends LinearOpMode
             robot.motorLeft.setPower(gamepad1.left_stick_y /4);
             robot.motorRight.setPower(gamepad1.right_stick_y /4);
 
-             //Arm slide control - uses gamepad1 a,b,y to contol
+           /*  //Arm slide control - uses gamepad1 a,b,y to contol
             while (gamepad1.a)
             {
                 robot.motorSlide.setPower(0.5);
@@ -95,7 +95,7 @@ public class MainTeleOp extends LinearOpMode
             {
                 robot.motorSlide.setPower(-0.5);
             }
-            robot.motorSlide.setPower(0.0);
+            robot.motorSlide.setPower(0.0);*/
 
             // Sweep Control - Uses gamepad2 a,b,y, to control
             if (gamepad2.a)
@@ -129,7 +129,7 @@ public class MainTeleOp extends LinearOpMode
             }
 
             //Arm Control- Uses dual button gamepad1 right bumper and trigger
-            if (gamepad1.left_bumper && gamepad1.left_trigger > 0.2)  // using 0.2 instead of 0.0 as a threshold in case the trigger does not fully release
+            if (gamepad1.left_bumper && gamepad1.left_trigger > 0.2)
             {
                 robot.motorArm.setPower(-gamepad1.left_trigger); // if both Bumper + Trigger, then negative power, runs lift down
                 robot.armHoldPosition = robot.motorArm.getCurrentPosition(); // update position

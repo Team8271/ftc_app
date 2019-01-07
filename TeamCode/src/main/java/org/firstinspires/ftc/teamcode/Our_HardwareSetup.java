@@ -88,7 +88,7 @@ public class Our_HardwareSetup {
         motorRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         motorSweep.setDirection(DcMotor.Direction.FORWARD); // Can change based on motor configuration
         motorSlide.setDirection(DcMotor.Direction.FORWARD);
-        motorArm.setDirection(DcMotor.Direction.FORWARD);
+        motorArm.setDirection(DcMotor.Direction.REVERSE);
         motorLift.setDirection(DcMotor.Direction.FORWARD);
         //Keep the motors from moving during initialize.
         motorLeft.setPower(MOTOR_STOP);
@@ -97,10 +97,7 @@ public class Our_HardwareSetup {
         motorSlide.setPower(MOTOR_STOP);
         motorArm.setPower(MOTOR_STOP);
         motorLift.setPower(MOTOR_STOP);
-        // Set motors to run USING or WITHOUT enco
-        // ders
-        // Depending upon your configuration and use
-       // motorSweep.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // Set motors to run USING or WITHOUT encoders Depending upon your configuration and use
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
