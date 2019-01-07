@@ -88,7 +88,7 @@ public class Our_HardwareSetup {
         motorRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         motorSweep.setDirection(DcMotor.Direction.FORWARD); // Can change based on motor configuration
         motorSlide.setDirection(DcMotor.Direction.FORWARD);
-        motorArm.setDirection(DcMotor.Direction.REVERSE);
+        motorArm.setDirection(DcMotor.Direction.FORWARD);
         motorLift.setDirection(DcMotor.Direction.FORWARD);
         //Keep the motors from moving during initialize.
         motorLeft.setPower(MOTOR_STOP);

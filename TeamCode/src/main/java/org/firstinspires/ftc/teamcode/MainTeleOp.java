@@ -125,7 +125,8 @@ public class MainTeleOp extends LinearOpMode
             else
             {
                 //hold arm position Note: switched sign
-                robot.motorArm.setPower((double)(robot.armHoldPosition - robot.motorArm.getCurrentPosition() ) / robot.slopeVal * -1.0 );
+                robot.motorArm.setPower((double)(robot.armHoldPosition - robot.motorArm.getCurrentPosition() ) / robot.slopeVal * -1);
+                //robot.motorArm.setPower(0.0);
             }
 
 
@@ -144,7 +145,7 @@ public class MainTeleOp extends LinearOpMode
             else
             {
                 //hold lift position
-                robot.motorLift.setPower((double)(robot.liftHoldPosition - robot.motorLift.getCurrentPosition()) / robot.slopeVal );
+                robot.motorLift.setPower((double)(robot.liftHoldPosition - robot.motorLift.getCurrentPosition()) / robot.slopeVal  );
             }
 
 
