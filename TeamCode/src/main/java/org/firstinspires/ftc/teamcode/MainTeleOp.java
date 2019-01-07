@@ -86,7 +86,7 @@ public class MainTeleOp extends LinearOpMode
             robot.motorLeft.setPower(gamepad1.left_stick_y /4);
             robot.motorRight.setPower(gamepad1.right_stick_y /4);
 
-           /*  //Arm slide control - uses gamepad1 a,b,y to contol
+           /*  //Arm slide control -
             while (gamepad1.a)
             {
                 robot.motorSlide.setPower(0.5);
@@ -111,23 +111,6 @@ public class MainTeleOp extends LinearOpMode
                 robot.motorSweep.setPower(0); //stop
             }
 
-            // Lift Control - Uses dual buttons on gamepad 2 left bumper and trigger
-            if (gamepad2.left_bumper && gamepad2.left_trigger > 0.2)  // using 0.2 instead of 0.0 as a threshold in case the trigger does not fully release
-            {
-                robot.motorLift.setPower(-gamepad2.left_trigger); // if both Bumper + Trigger, then negative power, runs lift down
-                robot.liftHoldPosition = robot.motorLift.getCurrentPosition(); // update position
-            }
-            else if (!gamepad2.left_bumper && gamepad2.left_trigger > 0.2)
-            {
-                robot.motorLift.setPower(gamepad2.left_trigger);  // else trigger positive value, runs arm up
-                robot.liftHoldPosition = robot.motorLift.getCurrentPosition(); // update position
-            }
-            else
-            {
-                //hold motor position
-                robot.motorLift.setPower((double)(robot.liftHoldPosition - robot.motorLift.getCurrentPosition()) / robot.slopeVal );
-            }
-
             //Arm Control- Uses dual button gamepad1 right bumper and trigger
             if (gamepad1.left_bumper && gamepad1.left_trigger > 0.2)
             {
@@ -141,9 +124,30 @@ public class MainTeleOp extends LinearOpMode
             }
             else
             {
-                //hold motor position
-                robot.motorArm.setPower((double)(robot.armHoldPosition - robot.motorArm.getCurrentPosition()) / robot.slopeVal );
+                //hold arm position Note:
+                robot.motorArm.setPower((double)(robot.motorArm.getCurrentPosition() - robot.armHoldPosition) / robot.slopeVal );
             }
+
+
+
+            // Lift Control - Uses dual buttons on gamepad 2 left bumper and trigger
+            if (gamepad2.left_bumper && gamepad2.left_trigger > 0.2)  // using 0.2 instead of 0.0 as a threshold in case the trigger does not fully release
+            {
+                robot.motorLift.setPower(-gamepad2.left_trigger); // if both Bumper + Trigger, then negative power, runs lift down
+                robot.liftHoldPosition = robot.motorLift.getCurrentPosition(); // update position
+            }
+            else if (!gamepad2.left_bumper && gamepad2.left_trigger > 0.2)
+            {
+                robot.motorLift.setPower(gamepad2.left_trigger);  // else trigger positive value, runs arm up
+                robot.liftHoldPosition = robot.motorLift.getCurrentPosition(); // update position
+            }
+            else
+            {
+                //hold lift position
+                robot.motorLift.setPower((double)(robot.liftHoldPosition - robot.motorLift.getCurrentPosition()) / robot.slopeVal );
+            }
+
+
 
             /*//servo commands
             if(gamepad2.a) //button 'a' will open
