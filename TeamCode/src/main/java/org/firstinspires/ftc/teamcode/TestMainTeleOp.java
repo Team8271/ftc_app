@@ -40,14 +40,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * This file is our main teleOp
  */
 
-@TeleOp(name="Main TeleOp", group="Competition")  // @Autonomous(...) is the other common choice
+@TeleOp(name="TEST Main TeleOp", group="testing")  // @Autonomous(...) is the other common choice
 //@Disabled
-public class MainTeleOp extends LinearOpMode
+public class TestMainTeleOp extends LinearOpMode
 { /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
 
     //Declare robot hardware
-    Our_HardwareSetup robot      = new Our_HardwareSetup();
+    TEST_HardwareSetup robot      = new TEST_HardwareSetup();
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -80,36 +80,6 @@ public class MainTeleOp extends LinearOpMode
 
             telemetry.update();
 
-            // tank drive set to gamepad1 joysticks
-            //(note: The joystick goes negative when pushed forwards)
-
-            robot.motorLeft.setPower(gamepad1.left_stick_y /4);
-            robot.motorRight.setPower(gamepad1.right_stick_y /4);
-
-           /*  //Arm slide control -
-            while (gamepad1.a)
-            {
-                robot.motorSlide.setPower(0.5);
-            }
-            while (gamepad1.b)
-            {
-                robot.motorSlide.setPower(-0.5);
-            }
-            robot.motorSlide.setPower(0.0);*/
-
-            // Sweep Control - Uses gamepad2 a,b,y, to control
-            if (gamepad2.a)
-            {
-                robot.motorSweep.setPower(1.0); //forward
-            }
-            else if (gamepad2.b)
-            {
-                robot.motorSweep.setPower(-1.0); //reverse
-            }
-            else if (gamepad2.y)
-            {
-                robot.motorSweep.setPower(0); //stop
-            }
 
             //Arm Control- Uses dual button gamepad1 right bumper and trigger
             if (gamepad1.left_bumper && gamepad1.left_trigger > 0.2)
@@ -149,17 +119,6 @@ public class MainTeleOp extends LinearOpMode
             }
 
 
-
-            /*//servo commands
-            if(gamepad2.a) //button 'a' will open
-            {
-                robot.servoHand.setPosition(robot.OPEN);
-            }
-            else if (gamepad2.b) //button 'b' will close
-            {
-                robot.servoHand.setPosition(robot.CLOSED);
-            }
-*/
             idle(); // Always call idle() at the bottom of your while(opModeIsActive()) loop
         }
     }
