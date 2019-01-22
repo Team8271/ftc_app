@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
@@ -46,8 +47,8 @@ public class TEST_HardwareSetup {
          ************************************************************/
         // Define Motors to match Robot Configuration File
 
-        motorArm = hwMap.dcMotor.get("Arm");
-        motorLift = hwMap.dcMotor.get("Lift");
+        motorArm = hwMap.dcMotor.get("Arm"); //port 0
+        motorLift = hwMap.dcMotor.get("Lift"); //port 3
         // Set the drive motor directions:
 
         motorArm.setDirection(DcMotor.Direction.FORWARD);

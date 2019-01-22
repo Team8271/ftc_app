@@ -119,7 +119,7 @@ public class OurAutoDriveByTime extends LinearOpMode {
     }
 
    // public void RaiseArm()
-/*    {
+    {
         robot.servoHand.setPosition(.8); //note: uses servo instead of motor.
     }
 
@@ -127,7 +127,7 @@ public class OurAutoDriveByTime extends LinearOpMode {
     {
         robot.servoHand.setPosition(.2);
     }
-*/
+
 
 
 }//TestAutoDriveByTime

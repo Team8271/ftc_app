@@ -38,7 +38,7 @@ public class Our_HardwareSetup {
     //public DcMotor  = null;
     //servos
 
-    //public Servo servoHand = null;
+    public Servo servoHand = null;
     //public Servo servoHandR = null;
     //public Servo crServo    = null;
 
