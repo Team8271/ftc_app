@@ -37,7 +37,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
- * This file is our main teleOp
+ * This file is our main teleOp with the orginal gamepad controls
  */
 
 @TeleOp(name="Main TeleOp", group="Competition")  // @Autonomous(...) is the other common choice

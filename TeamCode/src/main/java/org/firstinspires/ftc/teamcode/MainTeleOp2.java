@@ -37,7 +37,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
- * This file is our main teleOp
+ * This file is our main teleOp with driving on gamepad 2 and else on gamepad 1
  */
 
 @TeleOp(name="Drive & Arm Separate", group= "Competition")  // @Autonomous(...) is the other common choice
