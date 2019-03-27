@@ -33,10 +33,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -48,9 +45,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Don't forget to comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Crater AutoByTime", group="comp")  // @TeleOp(...) is the other common choice
+@Autonomous(name="Depot AutoByTime", group="comp")  // @TeleOp(...) is the other common choice
 //@Disabled
-public class OurAutoDriveByTime extends LinearOpMode {
+public class OurAutoDriveByTimev2 extends LinearOpMode {
 
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
@@ -74,10 +71,15 @@ public class OurAutoDriveByTime extends LinearOpMode {
         /************************
          * Autonomous Code Below://
          *************************/
-        RaiseArm(time, 2760);
+        RaiseArm(1.0, 2760);
         StopDriving();
 
         DriveForwardTime(1.0, 2000);
+        StopDriving();
+        DriveForwardTime(-1.0, 1500);
+        Sweeper(1.0, 1000);
+
+
 
         StopDriving();
 
@@ -90,7 +92,7 @@ public class OurAutoDriveByTime extends LinearOpMode {
     public void DriveForward(double power)
     {
         robot.motorLeft.setPower(power);
-        robot.motorRight.setPower(  power);
+        robot.motorRight.setPower(power);
     }
 
     public void DriveForwardTime(double power, long time) throws InterruptedException
@@ -111,8 +113,8 @@ public class OurAutoDriveByTime extends LinearOpMode {
 
     public void TurnLeft(double power, long time) throws InterruptedException
     {
-        robot.motorLeft.setPower(-power);
-        robot.motorRight.setPower(power);
+        robot.motorLeft.setPower(power);
+        robot.motorRight.setPower(-power);
         Thread.sleep(time);
     }
 
@@ -135,6 +137,11 @@ public class OurAutoDriveByTime extends LinearOpMode {
         robot.motorLift.setPower(0) ;
     }
 
-
+    public void Sweeper(double power, long time)throws InterruptedException
+    {
+        robot.motorSweep.setPower(-power);
+        Thread.sleep(time);
+        robot.motorSweep.setPower(0);
+    }
 
 }//TestAutoDriveByTime

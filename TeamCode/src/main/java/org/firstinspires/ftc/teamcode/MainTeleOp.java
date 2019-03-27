@@ -36,8 +36,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-/**
- * This file is our main teleOp with the orginal gamepad controls
+/**his file is our main teleOp with the orginal gamepad controls
  */
 
 @TeleOp(name="Main TeleOp", group="Competition")  // @Autonomous(...) is the other common choice
@@ -50,6 +49,7 @@ public class MainTeleOp extends LinearOpMode
     Our_HardwareSetup robot      = new Our_HardwareSetup();
 
     @Override
+ * T
     public void runOpMode() throws InterruptedException
     {
 
