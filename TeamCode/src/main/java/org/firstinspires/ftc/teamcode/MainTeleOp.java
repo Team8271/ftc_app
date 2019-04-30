@@ -49,7 +49,7 @@ public class MainTeleOp extends LinearOpMode
     Our_HardwareSetup robot      = new Our_HardwareSetup();
 
     @Override
- * T
+
     public void runOpMode() throws InterruptedException
     {
 
@@ -64,19 +64,19 @@ public class MainTeleOp extends LinearOpMode
         waitForStart();
         runtime.reset();
         // initialize current position of arm motor
-        robot.liftHoldPosition = robot.motorLift.getCurrentPosition();
-        robot.armHoldPosition = robot.motorArm.getCurrentPosition();
+        //robot.liftHoldPosition = robot.motorLift.getCurrentPosition();
+        //robot.armHoldPosition = robot.motorArm.getCurrentPosition();
 
         /************************
          * TeleOp Code Below://
          *************************/
         while (opModeIsActive()) // run until the end of the match (driver presses STOP)
         {
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
+          /*  telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("LiftPosition: ", + robot.motorLift.getCurrentPosition());
             telemetry.addData("LiftHoldPosition: ", + robot.liftHoldPosition);
             telemetry.addData("ArmPosition: ", + robot.motorArm.getCurrentPosition());
-            telemetry.addData("ArmHoldPosition: ", + robot.armHoldPosition);
+            telemetry.addData("ArmHoldPosition: ", + robot.armHoldPosition);*/
 
             telemetry.update();
 
@@ -84,9 +84,9 @@ public class MainTeleOp extends LinearOpMode
             //(note: The joystick goes negative when pushed forwards)
 
             robot.motorLeft.setPower(gamepad1.left_stick_y /4);
-            robot.motorRight.setPower(gamepad1.right_stick_y /4);
+            //robot.motorRight.setPower(gamepad1.right_stick_y /4);
 
-            //Arm slide control -
+           /* //Arm slide control -
             if (gamepad1.a)
             {
                 robot.motorSlide.setPower(0.5);
@@ -146,7 +146,7 @@ public class MainTeleOp extends LinearOpMode
             {
                 //hold lift position
                 robot.motorLift.setPower((double)(robot.liftHoldPosition - robot.motorLift.getCurrentPosition()) / robot.slopeVal  );
-            }
+            }*/
 
 
 
