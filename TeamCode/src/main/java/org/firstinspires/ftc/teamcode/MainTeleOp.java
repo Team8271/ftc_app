@@ -72,11 +72,11 @@ public class MainTeleOp extends LinearOpMode
          *************************/
         while (opModeIsActive()) // run until the end of the match (driver presses STOP)
         {
-          /*  telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("LiftPosition: ", + robot.motorLift.getCurrentPosition());
             telemetry.addData("LiftHoldPosition: ", + robot.liftHoldPosition);
             telemetry.addData("ArmPosition: ", + robot.motorArm.getCurrentPosition());
-            telemetry.addData("ArmHoldPosition: ", + robot.armHoldPosition);*/
+            telemetry.addData("ArmHoldPosition: ", + robot.armHoldPosition);
 
             telemetry.update();
 
@@ -84,9 +84,9 @@ public class MainTeleOp extends LinearOpMode
             //(note: The joystick goes negative when pushed forwards)
 
             robot.motorLeft.setPower(gamepad1.left_stick_y /4);
-            //robot.motorRight.setPower(gamepad1.right_stick_y /4);
+            robot.motorRight.setPower(gamepad1.right_stick_y /4);
 
-           /* //Arm slide control -
+            //Arm slide control -
             if (gamepad1.a)
             {
                 robot.motorSlide.setPower(0.5);
@@ -126,7 +126,7 @@ public class MainTeleOp extends LinearOpMode
             {
                 //hold arm position Note: switched sign
                 robot.motorArm.setPower((double)(robot.armHoldPosition - robot.motorArm.getCurrentPosition() ) / robot.slopeVal );
-                //robot.motorArm.setPower(0.0);
+                robot.motorArm.setPower(0.0);
             }
 
 
@@ -146,7 +146,7 @@ public class MainTeleOp extends LinearOpMode
             {
                 //hold lift position
                 robot.motorLift.setPower((double)(robot.liftHoldPosition - robot.motorLift.getCurrentPosition()) / robot.slopeVal  );
-            }*/
+            }
 
 
 
